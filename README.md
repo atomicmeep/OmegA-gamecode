@@ -1,8 +1,8 @@
-# OpenArena gamecode
-![Build status](https://github.com/openarena/gamecode/actions/workflows/main.yml/badge.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/90453976351f455f89d42651658fa63a)](https://www.codacy.com/app/github_43/gamecode_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenArena/gamecode&amp;utm_campaign=Badge_Grade)
+# OmegA gamecode
+![Build status](https://github.com/openarena/gamecode/actions/workflows/main.yml/badge.svg)
 
 ## Description ##
-This is the game code part of OpenArena. In mod form it is referred as OpenArenaExpanded (OAX).
+This is the game code part of OmegA.
 
 ## Building ##
 
@@ -25,11 +25,11 @@ cd code/game
 ```
 
 ## Links ##
-Development documentation is located here: https://github.com/OpenArena/gamecode/wiki
+Fandom : https://openarena.fandom.com/wiki/Mods/OpenArena_OmegA
 
-The development board on the OpenArena forum: http://openarena.ws/board/index.php?board=30.0
+Google Sites : https://sites.google.com/view/openarena-omega/accueil
 
-In particular the Open Arena Expanded topic: http://openarena.ws/board/index.php?topic=1908.0
+Mod DB : https://www.moddb.com/mods/openarena-omega
 
 ## License ##
 
