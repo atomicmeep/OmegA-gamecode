@@ -317,7 +317,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_autoswitch, "cg_autoswitch", "1", CVAR_ARCHIVE},
 	{ &cg_drawGun, "cg_drawGun", "1", CVAR_ARCHIVE},
 	{ &cg_zoomFov, "cg_zoomfov", "22.5", CVAR_ARCHIVE},
-	{ &cg_fov, "cg_fov", "90", CVAR_ARCHIVE},
+	{ &cg_fov, "cg_fov", "115", CVAR_ARCHIVE},
 	{ &cg_viewsize, "cg_viewsize", "100", CVAR_ARCHIVE},
 	{ &cg_viewnudge, "cg_viewnudge", "0", CVAR_ARCHIVE},
 	{ &cg_shadows, "cg_shadows", "1", CVAR_ARCHIVE},
@@ -325,7 +325,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_draw2D, "cg_draw2D", "1", CVAR_ARCHIVE},
 	{ &cg_drawStatus, "cg_drawStatus", "1", CVAR_ARCHIVE},
 	{ &cg_drawTimer, "cg_drawTimer", "0", CVAR_ARCHIVE},
-	{ &cg_drawFPS, "cg_drawFPS", "0", CVAR_ARCHIVE},
+	{ &cg_drawFPS, "cg_drawFPS", "1", CVAR_ARCHIVE},
 	{ &cg_drawSnapshot, "cg_drawSnapshot", "0", CVAR_ARCHIVE},
 	{ &cg_draw3dIcons, "cg_draw3dIcons", "1", CVAR_ARCHIVE},
 	{ &cg_drawIcons, "cg_drawIcons", "1", CVAR_ARCHIVE},
@@ -884,7 +884,7 @@ static void CG_RegisterSounds(void) {
 	cgs.media.invulnerabilityImpactSound3 = trap_S_RegisterSound("sound/items/invul_impact_03.wav", qfalse);
 	cgs.media.invulnerabilityJuicedSound = trap_S_RegisterSound("sound/items/invul_juiced.wav", qfalse);
 
-	cgs.media.ammoregenSound = trap_S_RegisterSound("sound/items/cl_ammoregen.wav", qfalse);
+	//cgs.media.ammoregenSound = trap_S_RegisterSound("sound/items/cl_ammoregen.wav", qfalse);
 	cgs.media.doublerSound = trap_S_RegisterSound("sound/items/cl_doubler.wav", qfalse);
 	cgs.media.guardSound = trap_S_RegisterSound("sound/items/cl_guard.wav", qfalse);
 	cgs.media.scoutSound = trap_S_RegisterSound("sound/items/cl_scout.wav", qfalse);
@@ -1003,19 +1003,19 @@ static void CG_RegisterSounds(void) {
 	cgs.media.sfx_rockexp = trap_S_RegisterSound("sound/weapons/rocket/rocklx1a.wav", qfalse);
 	cgs.media.sfx_plasmaexp = trap_S_RegisterSound("sound/weapons/plasma/plasmx1a.wav", qfalse);
 	cgs.media.sfx_proxexp = trap_S_RegisterSound("sound/weapons/proxmine/wstbexpl.wav", qfalse);
-	cgs.media.sfx_nghit = trap_S_RegisterSound("sound/weapons/nailgun/wnalimpd.wav", qfalse);
+	//cgs.media.sfx_nghit = trap_S_RegisterSound("sound/weapons/nailgun/wnalimpd.wav", qfalse);
 	cgs.media.sfx_nghitflesh = trap_S_RegisterSound("sound/weapons/nailgun/wnalimpl.wav", qfalse);
 	cgs.media.sfx_nghitmetal = trap_S_RegisterSound("sound/weapons/nailgun/wnalimpm.wav", qfalse);
-	cgs.media.sfx_chghit = trap_S_RegisterSound("sound/weapons/vulcan/wvulimpd.wav", qfalse);
-	cgs.media.sfx_chghitflesh = trap_S_RegisterSound("sound/weapons/vulcan/wvulimpl.wav", qfalse);
-	cgs.media.sfx_chghitmetal = trap_S_RegisterSound("sound/weapons/vulcan/wvulimpm.wav", qfalse);
+	//cgs.media.sfx_chghit = trap_S_RegisterSound("sound/weapons/vulcan/wvulimpd.wav", qfalse);
+	//cgs.media.sfx_chghitflesh = trap_S_RegisterSound("sound/weapons/vulcan/wvulimpl.wav", qfalse);
+	//cgs.media.sfx_chghitmetal = trap_S_RegisterSound("sound/weapons/vulcan/wvulimpm.wav", qfalse);
 	cgs.media.weaponHoverSound = trap_S_RegisterSound("sound/weapons/weapon_hover.wav", qfalse);
 	cgs.media.kamikazeExplodeSound = trap_S_RegisterSound("sound/items/kam_explode.wav", qfalse);
 	cgs.media.kamikazeImplodeSound = trap_S_RegisterSound("sound/items/kam_implode.wav", qfalse);
 	cgs.media.kamikazeFarSound = trap_S_RegisterSound("sound/items/kam_explode_far.wav", qfalse);
 	cgs.media.winnerSound = trap_S_RegisterSound("sound/feedback/voc_youwin.wav", qfalse);
 	cgs.media.loserSound = trap_S_RegisterSound("sound/feedback/voc_youlose.wav", qfalse);
-	cgs.media.youSuckSound = trap_S_RegisterSound("sound/misc/yousuck.wav", qfalse);
+	//cgs.media.youSuckSound = trap_S_RegisterSound("sound/misc/yousuck.wav", qfalse);
 
 	cgs.media.wstbimplSound = trap_S_RegisterSound("sound/weapons/proxmine/wstbimpl.wav", qfalse);
 	cgs.media.wstbimpmSound = trap_S_RegisterSound("sound/weapons/proxmine/wstbimpm.wav", qfalse);

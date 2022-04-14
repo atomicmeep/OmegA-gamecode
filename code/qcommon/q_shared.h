@@ -353,6 +353,9 @@ extern	vec3_t	bytedirs[NUMVERTEXNORMALS];
 #define	GIANTCHAR_WIDTH		32
 #define	GIANTCHAR_HEIGHT	48
 
+#define SCORECHAR_WIDTH		9
+#define SCORECHAR_HEIGHT	14
+
 extern	vec4_t		colorBlack;
 extern	vec4_t		colorRed;
 extern	vec4_t		colorGreen;

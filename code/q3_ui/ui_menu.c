@@ -12,7 +12,7 @@ or (at your option) any later version.
 Quake III Arena source code is distributed in the hope that it will be
 useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+GNU General Public License for more details.yes I was talking about 0.8.8, ok I must have looked badly
 
 You should have received a copy of the GNU General Public License
 along with Quake III Arena source code; if not, write to the Free Software
@@ -235,8 +235,9 @@ static void Main_MenuDraw( void )
 	}
 
 	UI_DrawProportionalString( 320, 372, "", UI_CENTER|UI_SMALLFONT, color );
-	UI_DrawString( 320, 400, "OpenArena(c) 2005-2018 OpenArena Team", UI_CENTER|UI_SMALLFONT, color );
-	UI_DrawString( 320, 414, "OpenArena comes with ABSOLUTELY NO WARRANTY; this is free software", UI_CENTER|UI_SMALLFONT, color );
+	UI_DrawString( 320, 386, "OmegA(c) 2021-2022 EddieBrrrock Ekip", UI_CENTER|UI_SMALLFONT, color );
+	UI_DrawString( 320, 400, "based on OpenArena(c) 2005-2018 OpenArena Team", UI_CENTER|UI_SMALLFONT, color );
+	UI_DrawString( 320, 414, "OmegA/OpenArena comes with ABSOLUTELY NO WARRANTY; this is free software", UI_CENTER|UI_SMALLFONT, color );
 	UI_DrawString( 320, 428, "and you are welcome to redistribute it under certain conditions;", UI_CENTER|UI_SMALLFONT, color );
 	UI_DrawString( 320, 444, "read COPYING for details.", UI_CENTER|UI_SMALLFONT, color );
 

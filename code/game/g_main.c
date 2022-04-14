@@ -196,6 +196,9 @@ vmCvar_t g_developer;
 vmCvar_t g_spSkill;
 vmCvar_t g_bot_noChat;
 
+vmCvar_t	g_damageThroughWalls;
+vmCvar_t g_railJump;
+
 mapinfo_result_t mapinfo;
 
 // bk001129 - made static to avoid aliasing
@@ -412,7 +415,10 @@ static cvarTable_t gameCvarTable[] = {
 	/* Neon_Knight: Developer mode*/
 	{ &g_developer, "developer", "0", CVAR_CHEAT, 0, qtrue},
 	{ &g_spSkill, "g_spSkill", "2", 0, 0, qtrue},
-	{ &g_bot_noChat, "bot_nochat", "0", 0, 0, qtrue}
+	{ &g_bot_noChat, "bot_nochat", "0", 0, 0, qtrue},
+	{ &g_damageThroughWalls, "g_damageThroughWalls", "0", CVAR_ARCHIVE, 0, qtrue },
+	{ &g_railJump, "g_railJump", "1", CVAR_ARCHIVE, 0, qtrue}
+
 
 };
 

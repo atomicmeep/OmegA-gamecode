@@ -192,7 +192,7 @@ void SnapVectorTowards( vec3_t v, vec3_t to )
 
 #define CHAINGUN_SPREAD		600.0
 #define MACHINEGUN_SPREAD	200
-#define	MACHINEGUN_DAMAGE	7
+#define	MACHINEGUN_DAMAGE	10
 #define	MACHINEGUN_TEAM_DAMAGE	5		// wimpier MG in teamplay
 
 void Bullet_Fire (gentity_t *ent, float spread, int damage )
@@ -565,6 +565,9 @@ void weapon_railgun_fire (gentity_t *ent)
 	do {
 		trap_Trace (&trace, muzzle, NULL, NULL, end, passent, MASK_SHOT );
 		if ( trace.entityNum >= ENTITYNUM_MAX_NORMAL ) {
+			if (g_railJump.integer) {
+				G_RailJump( trace.endpos, ent );
+			}
 			break;
 		}
 		traceEnt = &g_entities[ trace.entityNum ];
@@ -597,6 +600,9 @@ void weapon_railgun_fire (gentity_t *ent)
 			}
 		}
 		if ( trace.contents & CONTENTS_SOLID ) {
+			if (g_railJump.integer) {
+				G_RailJump( trace.endpos, ent );
+			}
 			break;		// we hit something solid enough to stop the beam
 		}
 		// unlink this entity, so the next trace will go past it

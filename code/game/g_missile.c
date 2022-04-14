@@ -602,6 +602,7 @@ gentity_t *fire_plasma (gentity_t *self, vec3_t start, vec3_t dir)
 	bolt->s.eType = ET_MISSILE;
 	bolt->r.svFlags = SVF_USE_CURRENT_ORIGIN;
 	bolt->s.weapon = WP_PLASMAGUN;
+	bolt->s.eFlags = EF_BOUNCE_HALF;
 	bolt->r.ownerNum = self->s.number;
 //unlagged - projectile nudge
 	// we'll need this for nudging projectiles later
@@ -666,7 +667,7 @@ gentity_t *fire_grenade (gentity_t *self, vec3_t start, vec3_t dir)
 	bolt->s.pos.trType = TR_GRAVITY;
 	bolt->s.pos.trTime = level.time - MISSILE_PRESTEP_TIME;		// move a bit on the very first frame
 	VectorCopy( start, bolt->s.pos.trBase );
-	VectorScale( dir, 700, bolt->s.pos.trDelta );
+	VectorScale( dir, 1050, bolt->s.pos.trDelta );
 	SnapVector( bolt->s.pos.trDelta );			// save net bandwidth
 
 	VectorCopy (start, bolt->r.currentOrigin);
@@ -757,7 +758,7 @@ gentity_t *fire_rocket (gentity_t *self, vec3_t start, vec3_t dir)
 	bolt->s.pos.trType = TR_LINEAR;
 	bolt->s.pos.trTime = level.time - MISSILE_PRESTEP_TIME;		// move a bit on the very first frame
 	VectorCopy( start, bolt->s.pos.trBase );
-	VectorScale( dir, 900, bolt->s.pos.trDelta );
+	VectorScale( dir, 1125, bolt->s.pos.trDelta );
 	SnapVector( bolt->s.pos.trDelta );			// save net bandwidth
 	VectorCopy (start, bolt->r.currentOrigin);
 
@@ -905,7 +906,7 @@ gentity_t *fire_prox( gentity_t *self, vec3_t start, vec3_t dir )
 //unlagged - projectile nudge
 	bolt->parent = self;
 	bolt->damage = 0;
-	bolt->splashDamage = 100;
+	bolt->splashDamage = 200;
 	bolt->splashRadius = 150;
 	bolt->methodOfDeath = MOD_PROXIMITY_MINE;
 	bolt->splashMethodOfDeath = MOD_PROXIMITY_MINE;
@@ -921,7 +922,7 @@ gentity_t *fire_prox( gentity_t *self, vec3_t start, vec3_t dir )
 	bolt->s.pos.trType = TR_GRAVITY;
 	bolt->s.pos.trTime = level.time - MISSILE_PRESTEP_TIME;		// move a bit on the very first frame
 	VectorCopy( start, bolt->s.pos.trBase );
-	VectorScale( dir, 700, bolt->s.pos.trDelta );
+	VectorScale( dir, 875, bolt->s.pos.trDelta );
 	SnapVector( bolt->s.pos.trDelta );			// save net bandwidth
 
 	VectorCopy (start, bolt->r.currentOrigin);

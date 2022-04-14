@@ -860,10 +860,6 @@ void CG_RegisterWeapon( int weaponNum )
 	Q_strcat( path, sizeof(path), "_flash.md3" );
 	weaponInfo->flashModel = trap_R_RegisterModel( path );
 
-	if ( !weaponInfo->flashModel ) {
-		weaponInfo->flashModel = trap_R_RegisterModel( "models/weapons2/shotgun/shotgun_flash.md3" );	// default flash
-	}
-
 	// leilei - additional flash styles
 
 	Q_strncpyz( path, item->world_model[0], MAX_QPATH );
