@@ -1384,8 +1384,6 @@ int		trap_GeneticParentsAndChildSelection(int numranks, float *ranks, int *paren
 
 void	trap_SnapVector( float *v );
 
-extern vmCvar_t		g_damageThroughWalls;
-
 //KK-OAX
 //These enable the simplified command handling. 
 
