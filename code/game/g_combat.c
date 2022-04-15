@@ -1035,8 +1035,6 @@ static int catchup_damage(int damage, int attacker_points, int target_points)
 	return newdamage;
 }
 
-
-
 /*
 ============
 G_Damage
