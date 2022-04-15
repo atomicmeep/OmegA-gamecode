@@ -1852,10 +1852,10 @@ void MapInfoGet(const char* mapname, int gametype, mapinfo_result_t *result) {
 
 	trap_FS_FOpenFile(buffer, &file, FS_READ);
 
-	if (!file) {
-		Com_Printf("File %s not found\n", buffer);
-		return;
-	}
+	//if (!file) {
+		//Com_Printf("File %s not found\n", buffer);
+		//return;
+	//}
 
 	memset(&buffer, 0, sizeof (buffer));
 
@@ -1872,7 +1872,7 @@ void MapInfoGet(const char* mapname, int gametype, mapinfo_result_t *result) {
 		Q_strncpyz(keyBuffer, token, sizeof (keyBuffer));
 		token = COM_Parse(&pointer);
 
-		Com_Printf("Token \"%s\" found, with value: \"%s\"\n", keyBuffer, token);
+		//Com_Printf("Token \"%s\" found, with value: \"%s\"\n", keyBuffer, token);
 
 		if (Q_strequal(keyBuffer, "gametype")) {
 			mayRead = qfalse;
