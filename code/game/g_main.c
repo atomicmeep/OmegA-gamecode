@@ -195,6 +195,8 @@ vmCvar_t g_ddRespawnDelay;
 vmCvar_t g_developer;
 vmCvar_t g_spSkill;
 vmCvar_t g_bot_noChat;
+//OmegA
+vmCvar_t	g_railjump;
 
 mapinfo_result_t mapinfo;
 
@@ -341,6 +343,9 @@ static cvarTable_t gameCvarTable[] = {
 	{ &g_elimination_lockspectator, "elimination_lockspectator", "0", 0, qtrue },
 
 	{ &g_awardpushing, "g_awardpushing", "1", CVAR_ARCHIVE, 0, qtrue },
+
+	//OmegA
+	{ &g_railjump, "g_railjump", "1", 0, 0, qtrue  },
 
 	//g_persistantpowerups
 #ifdef MISSIONPACK

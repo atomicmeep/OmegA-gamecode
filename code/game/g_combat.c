@@ -365,6 +365,7 @@ static const char *modNames[] = {
 	"MOD_KAMIKAZE",
 	"MOD_JUICED",
 	"MOD_GRAPPLE"
+	"MOD_RAILJUMP",
 };
 
 /*
@@ -1236,6 +1237,11 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 		}
 		damage *= 0.5;
 	}
+
+	if ( mod == MOD_RAILJUMP && attacker->client && !attacker->client->ps.powerups[PW_QUAD] && targ->health > 0  ) {
+		return;
+	}
+	if ( targ == attacker && mod == MOD_RAILJUMP && !attacker->client->ps.powerups[PW_QUAD]) return;
 
 	// add to the attacker's hit counter (if the target isn't a general entity like a prox mine)
 	if ( attacker->client && client

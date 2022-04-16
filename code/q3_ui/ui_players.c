@@ -1080,7 +1080,7 @@ static qboolean UI_ParseAnimationFile( const char *filename, playerInfo_t *pi ) 
 	}
 
 	if ( i != MAX_ANIMATIONS - (TORSO_NEGATIVE - TORSO_GETFLAG + 1) ) {
-		Com_Printf( "Error parsing animation file: %s\n", filename );
+		//Com_Printf( "Error parsing animation file: %s\n", filename );
 		return qfalse;
 	}
 
@@ -1152,7 +1152,7 @@ qboolean UI_RegisterClientModelname( playerInfo_t *pi, const char *modelSkinName
 	// load the animations
 	Com_sprintf( filename, sizeof( filename ), "models/players/%s/animation.cfg", modelName );
 	if ( !UI_ParseAnimationFile( filename, pi ) ) {
-		Com_Printf( "Failed to load animation file %s\n", filename );
+		//Com_Printf( "Failed to load animation file %s\n", filename );
 		return qfalse;
 	}
 

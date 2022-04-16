@@ -398,7 +398,7 @@ static void CG_OldRocketTrail( centity_t *ent, const weaponInfo_t *wi )
 	up[1] = 0;
 	up[2] = 0;
 
-	step = 50;
+	step = 3;
 
 	es = &ent->currentState;
 	startTime = ent->trailTime;

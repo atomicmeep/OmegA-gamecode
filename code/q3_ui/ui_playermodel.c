@@ -678,9 +678,9 @@ static void PlayerModel_MenuInit( void )
 	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.framel );
 	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.framer );
 	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.ports );
-	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.playername );
-	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.modelname );
-	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.skinname );
+	//Menu_AddItem( &s_playermodel.menu,	&s_playermodel.playername );
+	//Menu_AddItem( &s_playermodel.menu,	&s_playermodel.modelname );
+	//Menu_AddItem( &s_playermodel.menu,	&s_playermodel.skinname );
 
 	for (i=0; i<MAX_MODELSPERPAGE; i++)
 	{

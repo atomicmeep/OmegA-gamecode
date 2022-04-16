@@ -187,7 +187,7 @@ static char* netnames[] = {
 	NULL
 };
 
-static char quake3worldMessage[] = "Visit www.openarena.ws - News, Community, Events, Files";
+static char quake3worldMessage[] = "Visit moddb.com/mods/openarena-omega - News, Community, Events, Files";
 
 
 typedef struct {

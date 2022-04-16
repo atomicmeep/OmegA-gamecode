@@ -675,7 +675,8 @@ typedef enum {
 	MOD_PROXIMITY_MINE,
 	MOD_KAMIKAZE,
 	MOD_JUICED,
-	MOD_GRAPPLE
+	MOD_GRAPPLE,
+	MOD_RAILJUMP
 } meansOfDeath_t;
 
 

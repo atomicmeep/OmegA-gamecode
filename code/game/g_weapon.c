@@ -615,6 +615,9 @@ void weapon_railgun_fire (gentity_t *ent)
 	for ( i = 0 ; i < unlinked ; i++ ) {
 		trap_LinkEntity( unlinkedEntities[i] );
 	}
+	if ( g_railjump.integer || ent->client->ps.powerups[PW_QUAD] ) {
+		G_RadiusDamage( trace.endpos, ent, 100, 120, NULL, MOD_RAILJUMP );
+	}
 
 	// the final trace endpos will be the terminal point of the rail trail
 
