@@ -581,7 +581,7 @@ static void PlayerModel_MenuInit( void )
 			s_playermodel.pics[k].width  		   = 64;
 			s_playermodel.pics[k].height  		   = 64;
 			s_playermodel.pics[k].focuspic         = MODEL_SELECTED;
-			s_playermodel.pics[k].focuscolor       = colorRed;
+			s_playermodel.pics[k].focuscolor       = colorBlue;
 
 			s_playermodel.picbuttons[k].generic.type	 = MTYPE_BITMAP;
 			s_playermodel.picbuttons[k].generic.flags    = QMF_LEFT_JUSTIFY|QMF_NODEFAULTINIT|QMF_PULSEIFFOCUS;
@@ -596,7 +596,7 @@ static void PlayerModel_MenuInit( void )
 			s_playermodel.picbuttons[k].width  		     = 128;
 			s_playermodel.picbuttons[k].height  		 = 128;
 			s_playermodel.picbuttons[k].focuspic  		 = MODEL_SELECT;
-			s_playermodel.picbuttons[k].focuscolor  	 = colorRed;
+			s_playermodel.picbuttons[k].focuscolor  	 = colorBlue;
 
 			x += 64+6;
 		}
