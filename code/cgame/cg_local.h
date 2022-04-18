@@ -1479,8 +1479,6 @@ extern vmCvar_t cg_leiChibi;
 /* Neon_Knight: Developer mode. */
 extern vmCvar_t cg_developer;
 /* /Neon_Knight */
-//OmegA
-extern vmCvar_t cg_noLodbias;
 
 //unlagged - cg_unlagged.c
 void CG_PredictWeaponEffects( centity_t *cent );

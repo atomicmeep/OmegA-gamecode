@@ -217,9 +217,6 @@ vmCvar_t cg_deathcam; // ANOTHER LEILEI LINE!!!
 vmCvar_t cg_cameramode; // ANOTHER LEILEI LINE!!!
 vmCvar_t cg_cameraEyes; // ANOTHER LEILEI LINE!!!
 
-//OmegA
-vmCvar_t cg_noLodbias;
-
 
 
 #ifdef MISSIONPACK
@@ -379,8 +376,6 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_teamChatHeight, "cg_teamChatHeight", "0", CVAR_ARCHIVE},
 	{ &cg_forceModel, "cg_forceModel", "0", CVAR_ARCHIVE},
 	{ &cg_predictItems, "cg_predictItems", "1", CVAR_ARCHIVE},
-	//OmegA
-	{ &cg_noLodbias, "cg_noLodbias", "1", CVAR_ARCHIVE},
 
 #ifdef MISSIONPACK
 	{ &cg_deferPlayers, "cg_deferPlayers", "0", CVAR_ARCHIVE},
@@ -560,9 +555,6 @@ void CG_RegisterCvars(void) {
 	if (cg_missionpackChecks.integer) {
 		trap_Cvar_Register(NULL, "team_model", DEFAULT_TEAM_MODEL, CVAR_USERINFO | CVAR_ARCHIVE);
 		trap_Cvar_Register(NULL, "team_headmodel", DEFAULT_TEAM_HEAD, CVAR_USERINFO | CVAR_ARCHIVE);
-	}
-	if( cg_noLodbias.integer ) {
-		trap_Cvar_Set("r_lodbias", "-2");
 	}
 }
 
