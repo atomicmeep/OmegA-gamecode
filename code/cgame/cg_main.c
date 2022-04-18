@@ -376,7 +376,6 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_teamChatHeight, "cg_teamChatHeight", "0", CVAR_ARCHIVE},
 	{ &cg_forceModel, "cg_forceModel", "0", CVAR_ARCHIVE},
 	{ &cg_predictItems, "cg_predictItems", "1", CVAR_ARCHIVE},
-
 #ifdef MISSIONPACK
 	{ &cg_deferPlayers, "cg_deferPlayers", "0", CVAR_ARCHIVE},
 #else
