@@ -2285,6 +2285,11 @@ static qboolean CG_PlayerShadow(centity_t *cent, float *shadowPlane) {
 		return qfalse;
 	}
 
+	//no shadows when predator
+	if (cent->currentState.powerups & (1 << PW_PREDATOR)) {
+		return qfalse;
+	}
+
 	// send a trace down from the player to the ground
 	VectorCopy(cent->lerpOrigin, end);
 	end[2] -= SHADOW_DISTANCE;
@@ -2414,6 +2419,12 @@ Also called by CG_Missile for quad rockets, but nobody can tell...
 void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int team, qboolean isMissile) {
 
 	if (state->powerups & (1 << PW_INVIS)) {
+		if ((cgs.dmflags & DF_INVIS) == 0) {
+			ent->customShader = cgs.media.invisShader;
+			trap_R_AddRefEntityToScene(ent);
+		}
+	}
+	if (state->powerups & (1 << PW_PREDATOR)) {
 		if ((cgs.dmflags & DF_INVIS) == 0) {
 			ent->customShader = cgs.media.invisShader;
 			trap_R_AddRefEntityToScene(ent);

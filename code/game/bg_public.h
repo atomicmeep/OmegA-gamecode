@@ -312,6 +312,7 @@ typedef enum {
 	PW_INVIS,
 	PW_REGEN,
 	PW_FLIGHT,
+	PW_PREDATOR,
 
 	PW_REDFLAG,
 	PW_BLUEFLAG,

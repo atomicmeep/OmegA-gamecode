@@ -593,7 +593,7 @@ static void UI_PlayerAngles( playerInfo_t *pi, vec3_t legs[3], vec3_t torso[3], 
 	float		adjust;
 
 	VectorCopy( pi->viewAngles, headAngles );
-	headAngles[YAW] = AngleMod( headAngles[YAW] );
+	headAngles[YAW] = AngleMod( headAngles[YAW] ) - uis.realtime / 25;
 	VectorClear( legsAngles );
 	VectorClear( torsoAngles );
 
@@ -610,16 +610,16 @@ static void UI_PlayerAngles( playerInfo_t *pi, vec3_t legs[3], vec3_t torso[3], 
 
 	// adjust legs for movement dir
 	adjust = UI_MovedirAdjustment( pi );
-	legsAngles[YAW] = headAngles[YAW] + adjust;
-	torsoAngles[YAW] = headAngles[YAW] + 0.25 * adjust;
+	legsAngles[YAW] = headAngles[YAW];
+	torsoAngles[YAW] = headAngles[YAW];
 
 
 	// torso
-	UI_SwingAngles( torsoAngles[YAW], 25, 90, SWINGSPEED, &pi->torso.yawAngle, &pi->torso.yawing );
-	UI_SwingAngles( legsAngles[YAW], 40, 90, SWINGSPEED, &pi->legs.yawAngle, &pi->legs.yawing );
+	UI_SwingAngles( torsoAngles[YAW], 0, 90, SWINGSPEED, &pi->torso.yawAngle, &pi->torso.yawing );
+	UI_SwingAngles( legsAngles[YAW], 0, 90, SWINGSPEED, &pi->legs.yawAngle, &pi->legs.yawing );
 
-	torsoAngles[YAW] = pi->torso.yawAngle;
-	legsAngles[YAW] = pi->legs.yawAngle;
+	//torsoAngles[YAW] = pi->torso.yawAngle;
+	//legsAngles[YAW] = pi->legs.yawAngle;
 
 	// --------- pitch -------------
 
@@ -765,7 +765,7 @@ void UI_DrawPlayer( float x, float y, float w, float h, playerInfo_t *pi, int ti
 	refdef.fov_y *= ( 360 / M_PI );
 
 	// calculate distance so the player nearly fills the box
-	len = 0.7 * ( maxs[2] - mins[2] );		
+	len = 0.60 * ( maxs[2] - mins[2] );		
 	origin[0] = len / tan( DEG2RAD(refdef.fov_x) * 0.5 );
 	origin[1] = 0.5 * ( mins[1] + maxs[1] );
 	origin[2] = -0.5 * ( mins[2] + maxs[2] );

@@ -2928,6 +2928,11 @@ static void CG_ScanForCrosshairEntity(void) {
 		return;
 	}
 
+	// if the player is predator, don't show it
+	if (cg_entities[ trace.entityNum ].currentState.powerups & (1 << PW_PREDATOR)) {
+		return;
+	}
+
 	// update the fade timer
 	cg.crosshairClientNum = trace.entityNum;
 	cg.crosshairClientTime = cg.time;

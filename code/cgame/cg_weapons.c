@@ -1571,8 +1571,16 @@ static void CG_AddWeaponWithPowerups( refEntity_t *gun, int powerups )
 			trap_R_AddRefEntityToScene( gun );
 		}
 	}
+	if ( powerups & ( 1 << PW_PREDATOR ) ) {
+		if( (cgs.dmflags & DF_INVIS) == 0) {
+			gun->customShader = cgs.media.invisShader;
+			trap_R_AddRefEntityToScene( gun );
+			trap_Cvar_Set("r_shownormals", "1");
+		}
+	}
 	else {
 		trap_R_AddRefEntityToScene( gun );
+		trap_Cvar_Set("r_shownormals", "0");
 
 		if ( powerups & ( 1 << PW_BATTLESUIT ) ) {
 			gun->customShader = cgs.media.battleWeaponShader;

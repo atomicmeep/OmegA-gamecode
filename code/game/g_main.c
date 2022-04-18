@@ -196,7 +196,7 @@ vmCvar_t g_developer;
 vmCvar_t g_spSkill;
 vmCvar_t g_bot_noChat;
 //OmegA
-vmCvar_t	g_railjump;
+vmCvar_t g_railjump;
 
 mapinfo_result_t mapinfo;
 
