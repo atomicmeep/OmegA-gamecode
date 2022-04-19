@@ -774,12 +774,12 @@ void UI_DrawPlayer( float x, float y, float w, float h, playerInfo_t *pi, int ti
 
 	trap_R_ClearScene();
 
-	// get the rotation information
-	UI_PlayerAngles( pi, legs.axis, torso.axis, head.axis );
-	
 	// get the animation state (after rotation, to allow feet shuffle)
 	UI_PlayerAnimation( pi, &legs.oldframe, &legs.frame, &legs.backlerp,
 		 &torso.oldframe, &torso.frame, &torso.backlerp );
+
+	// get the rotation information
+	UI_PlayerAngles( pi, legs.axis, torso.axis, head.axis );
 
 	renderfx = RF_LIGHTING_ORIGIN | RF_NOSHADOW;
 
