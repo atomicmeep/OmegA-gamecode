@@ -217,14 +217,6 @@ void CG_DrawStringExt( int x, int y, const char *string, const float *setColor,
 	trap_R_SetColor( NULL );
 }
 
-void CG_DrawScoreString( int x, int y, const char *s, float alpha, int maxchars ) {
-	float   color[4];
-
-	color[0] = color[1] = color[2] = 1.0;
-	color[3] = alpha;
-	CG_DrawStringExt( x, y, s, color, qfalse, qtrue, SCORECHAR_WIDTH, SCORECHAR_HEIGHT, maxchars );
-}
-
 void CG_DrawBigString( int x, int y, const char *s, float alpha ) {
 	float	color[4];
 
