@@ -339,7 +339,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_crosshairHealth, "cg_crosshairHealth", "1", CVAR_ARCHIVE},
 	{ &cg_crosshairX, "cg_crosshairX", "0", CVAR_ARCHIVE},
 	{ &cg_crosshairY, "cg_crosshairY", "0", CVAR_ARCHIVE},
-	{ &cg_brassTime, "cg_brassTime", "2500", CVAR_ARCHIVE},
+	{ &cg_brassTime, "cg_brassTime", "0", CVAR_ARCHIVE},
 	{ &cg_simpleItems, "cg_simpleItems", "0", CVAR_ARCHIVE},
 	{ &cg_addMarks, "cg_marks", "1", CVAR_ARCHIVE},
 	{ &cg_lagometer, "cg_lagometer", "1", CVAR_ARCHIVE},
@@ -393,7 +393,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_buildScript, "com_buildScript", "0", 0}, // force loading of all possible data amd error on failures
 	{ &cg_paused, "cl_paused", "0", CVAR_ROM},
 	{ &cg_blood, "com_blood", "1", CVAR_ARCHIVE},
-	{ &cg_alwaysWeaponBar, "cg_alwaysWeaponBar", "0", CVAR_ARCHIVE}, //Elimination
+	{ &cg_alwaysWeaponBar, "cg_alwaysWeaponBar", "1", CVAR_ARCHIVE}, //Elimination
 	{ &cg_hitsound, "cg_hitsound", "0", CVAR_ARCHIVE},
 	{ &cg_voip_teamonly, "cg_voipTeamOnly", "1", CVAR_ARCHIVE},
 	{ &cg_voteflags, "cg_voteflags", "*", CVAR_ROM},
@@ -439,7 +439,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_noProjectileTrail, "cg_noProjectileTrail", "0", CVAR_ARCHIVE},
 	{ &cg_smallFont, "ui_smallFont", "0.25", CVAR_ARCHIVE},
 	{ &cg_bigFont, "ui_bigFont", "0.4", CVAR_ARCHIVE},
-	{ &cg_oldRail, "cg_oldRail", "0", CVAR_ARCHIVE},
+	{ &cg_oldRail, "cg_oldRail", "1", CVAR_ARCHIVE},
 	{ &cg_oldRocket, "cg_oldRocket", "1", CVAR_ARCHIVE},
 	{ &cg_leiEnhancement, "cg_leiEnhancement", "0", CVAR_ARCHIVE}, // LEILEI default off (in case of whiner)
 	{ &cg_leiGoreNoise, "cg_leiGoreNoise", "0", CVAR_ARCHIVE}, // LEILEI 
@@ -512,7 +512,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_crosshairColorGreen, "cg_crosshairColorGreen", "1.0", CVAR_ARCHIVE},
 	{ &cg_crosshairColorBlue, "cg_crosshairColorBlue", "1.0", CVAR_ARCHIVE},
 
-	{ &cg_weaponBarStyle, "cg_weaponBarStyle", "0", CVAR_ARCHIVE},
+	{ &cg_weaponBarStyle, "cg_weaponBarStyle", "8", CVAR_ARCHIVE},
 	{ &cg_weaponOrder, "cg_weaponOrder", "/1/2/4/3/6/7/8/5/9/", CVAR_ARCHIVE},
 	{&cg_chatBeep, "cg_chatBeep", "1", CVAR_ARCHIVE},
 	{&cg_teamChatBeep, "cg_teamChatBeep", "1", CVAR_ARCHIVE},
@@ -1248,6 +1248,10 @@ static void CG_RegisterGraphics(void) {
 		cgs.media.blueKamikazeShader = trap_R_RegisterShader("models/weaphits/kamikblu");
 	}
 	cgs.media.teamStatusBar = trap_R_RegisterShader("gfx/2d/colorbar.tga");
+
+	cgs.media.healthCrossModel = trap_R_RegisterModel("models/powerups/health/medium_cross.md3");
+	cgs.media.healthSphereModel = trap_R_RegisterModel("models/powerups/health/medium_sphere.md3");
+	cgs.media.healthIcon = trap_R_RegisterShaderNoMip("icons/iconh_yellow");
 
 	cgs.media.armorModel = trap_R_RegisterModel("models/powerups/armor/armor_yel.md3");
 	cgs.media.armorIcon = trap_R_RegisterShaderNoMip("icons/iconr_yellow");

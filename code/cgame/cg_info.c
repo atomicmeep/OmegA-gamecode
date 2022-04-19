@@ -178,7 +178,7 @@ void CG_DrawInformation( void ) {
 	color[3] = 0.6;
 	CG_FillRect( 0, 450, 640, 30, color);
 			
-	CG_DrawScoreString(10, 465-SCORECHAR_HEIGHT/2, S_COLOR_CYAN "O" S_COLOR_YELLOW "MEG" S_COLOR_CYAN "A", 1.0, 0);
+	CG_DrawScoreString(10, 465-SCORECHAR_HEIGHT/2, S_COLOR_BLUE "O" S_COLOR_YELLOW "MEG" S_COLOR_BLUE "A", 1.0, 0);
 	s = S_COLOR_YELLOW "Est-ce que 6 fois 9 ca fait 54 ?";
 	CG_DrawScoreString(630-CG_DrawStrlen(s)*SCORECHAR_WIDTH, 465-SCORECHAR_HEIGHT/2, s, 1.0, 0);
 
@@ -218,7 +218,7 @@ void CG_DrawInformation( void ) {
 		s = CG_ConfigString( CS_MOTD );
 		if ( s[0] ) {
 			UI_DrawProportionalString( 320, y, s,
-				UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, colorCyan );
+				UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, colorGreen );
 			y += PROP_HEIGHT;
 		}
 
@@ -230,7 +230,7 @@ void CG_DrawInformation( void ) {
 	s = CG_ConfigString( CS_MESSAGE );
 	if ( s[0] ) {
 		UI_DrawProportionalString( 320, y, s,
-			UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, colorYellow );
+			UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, colorWhite );
 		y += PROP_HEIGHT;
 	}
 
@@ -291,7 +291,7 @@ void CG_DrawInformation( void ) {
 		break;
 	}
 	UI_DrawProportionalString( 320, y, s,
-		UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, colorGreen );
+		UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, colorWhite );
 	y += PROP_HEIGHT;
 		
 	value = atoi( Info_ValueForKey( info, "timelimit" ) );

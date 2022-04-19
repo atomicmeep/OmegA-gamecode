@@ -798,6 +798,10 @@ typedef struct {
 	qhandle_t	harvesterBlueSkin;
 	qhandle_t	harvesterNeutralModel;
 
+	qhandle_t	healthCrossModel;
+	qhandle_t	healthSphereModel;
+	qhandle_t	healthIcon;
+
 	qhandle_t	armorModel;
 	qhandle_t	armorIcon;
 
@@ -1688,6 +1692,7 @@ void CG_DrawWeaponBar4(int count, int bits, float *color);
 void CG_DrawWeaponBar5(int count, int bits, float *color);
 void CG_DrawWeaponBar6(int count, int bits, float *color);
 void CG_DrawWeaponBar7(int count, int bits, float *color);
+void CG_DrawWeaponBar8(int count, int bits, float *color);
 
 void CG_OutOfAmmoChange( void );	// should this be in pmove?
 

@@ -267,9 +267,6 @@ void CG_RailTrail (clientInfo_t *ci, vec3_t start, vec3_t end)
 	AxisClear( re->axis );
 
 	if (cg_oldRail.integer) {
-		// nudge down a bit so it isn't exactly in center
-		re->origin[2] -= 8;
-		re->oldorigin[2] -= 8;
 
 		// leilei - reimplementing the rail discs that were removed in 1.30
 		if (cg_oldRail.integer > 1) {
@@ -2332,6 +2329,9 @@ void CG_DrawWeaponSelect( void )
 	case 7:
 		CG_DrawWeaponBar7(count,bits, color);
 		break;
+	case 8:
+		CG_DrawWeaponBar8(count,bits, color);
+		break;
 	}
 	trap_R_SetColor(NULL);
 	return;
@@ -3182,6 +3182,73 @@ void CG_DrawWeaponBar7(int count, int bits, float *color)
 	}
 }
 
+/*
+===============
+CG_DrawWeaponBar8
+===============
+*/
+
+void CG_DrawWeaponBar8(int count, int bits, float *color)
+{
+
+	int y = 200 + count * 12;
+	int x = 0;
+	int i;
+	int w;
+	char *s;
+	float red[4];
+	float blue[4];
+
+	red[0] = 1.0f;
+	red[1] = 0;
+	red[2] = 0;
+	red[3] = 0.4f;
+
+	blue[0] = 0;
+	blue[1] = 0;
+	blue[2] = 1.0f;
+	blue[3] = 0.4f;
+
+	for ( i = 0 ; i < MAX_WEAPONS ; i++ ) {
+		//Sago: Do mad change of grapple placement:
+		if(i==10)
+			continue;
+		if(i==0)
+			i=10;
+		if ( !( bits & ( 1 << i ) ) ) {
+			if(i==10)
+				i=0;
+			continue;
+		}
+
+		if(cg.snap->ps.ammo[i]) {
+			if ( i == cg.weaponSelect) {
+				CG_FillRect( x, y, 50, 24, blue );
+			}
+		}
+		else {
+			if ( i == cg.weaponSelect) {
+				CG_FillRect( x, y, 50, 24, red );
+			}
+		}
+
+		CG_RegisterWeapon( i );
+		// draw weapon icon
+		CG_DrawPic( x+2, y+4, 16, 16, cg_weapons[i].weaponIcon );
+
+		/** Draw Weapon Ammo **/
+		if(cg.snap->ps.ammo[ i ]!=-1) {
+			s = va("%i", cg.snap->ps.ammo[ i ] );
+			w = CG_DrawStrlen( s ) * SMALLCHAR_WIDTH;
+			CG_DrawSmallStringColor(x - w/2 + 32, y+4, s, color);
+		}
+
+		y -= 24;
+		//Sago: Undo mad change of weapons
+		if(i==10)
+			i=0;
+	}
+}
 
 /*
 ===============
@@ -3677,7 +3744,7 @@ void CG_MissileHitWall( int weapon, int clientNum, vec3_t origin, vec3_t dir, im
 		// LEILEI END enhancement
 		break;
 	case WP_RAILGUN:
-		mod = cgs.media.ringFlashModel;
+		//mod = cgs.media.ringFlashModel;
 		shader = cgs.media.railExplosionShader;
 		sfx = cgs.media.sfx_plasmaexp;
 		mark = cgs.media.energyMarkShader;
