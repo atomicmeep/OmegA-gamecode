@@ -1255,8 +1255,8 @@ static void CG_RegisterGraphics(void) {
 	}
 	cgs.media.teamStatusBar = trap_R_RegisterShader("gfx/2d/colorbar.tga");
 
-	cgs.media.healthCrossModel = trap_R_RegisterModel("models/powerups/health/medium_cross.md3");
-	cgs.media.healthSphereModel = trap_R_RegisterModel("models/powerups/health/medium_sphere.md3");
+	cgs.media.healthCrossModel = trap_R_RegisterModel("models/powerups/health/small_cross.md3");
+	cgs.media.healthSphereModel = trap_R_RegisterModel("models/powerups/health/small_sphere.md3");
 	cgs.media.healthIcon = trap_R_RegisterShaderNoMip("icons/iconh_yellow");
 
 	cgs.media.armorModel = trap_R_RegisterModel("models/powerups/armor/armor_yel.md3");

@@ -613,8 +613,8 @@ static void PlayerModel_MenuInit( void )
 
 	s_playermodel.modelname.generic.type  = MTYPE_PTEXT;
 	s_playermodel.modelname.generic.flags = QMF_CENTER_JUSTIFY|QMF_INACTIVE;
-	s_playermodel.modelname.generic.x	  = 497;
-	s_playermodel.modelname.generic.y	  = 54;
+	s_playermodel.modelname.generic.x	  = 560;
+	s_playermodel.modelname.generic.y	  = 420;
 	s_playermodel.modelname.string	      = modelname;
 	s_playermodel.modelname.style		  = UI_CENTER;
 	s_playermodel.modelname.color         = text_color_normal;
@@ -679,7 +679,7 @@ static void PlayerModel_MenuInit( void )
 	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.framer );
 	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.ports );
 	//Menu_AddItem( &s_playermodel.menu,	&s_playermodel.playername );
-	//Menu_AddItem( &s_playermodel.menu,	&s_playermodel.modelname );
+	Menu_AddItem( &s_playermodel.menu,	&s_playermodel.modelname );
 	//Menu_AddItem( &s_playermodel.menu,	&s_playermodel.skinname );
 
 	for (i=0; i<MAX_MODELSPERPAGE; i++)
