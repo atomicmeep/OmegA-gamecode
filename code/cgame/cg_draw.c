@@ -202,7 +202,7 @@ Draws large numbers for status bar and powerups
  */
 #ifndef MISSIONPACK
 
-static void CG_DrawField (float x, float y, int width, int value, float char_width, float char_height) {
+static void CG_DrawField(float x, float y, int width, int value, float char_width, float char_height) {
 	char num[16], *ptr;
 	int l;
 	int frame;
@@ -216,7 +216,7 @@ static void CG_DrawField (float x, float y, int width, int value, float char_wid
 		width = 5;
 	}
 
-	switch ( width ) {
+	switch (width) {
 		case 1:
 			value = value > 9 ? 9 : value;
 			value = value < 0 ? 0 : value;
@@ -235,7 +235,7 @@ static void CG_DrawField (float x, float y, int width, int value, float char_wid
 			break;
 	}
 
-	Com_sprintf (num, sizeof (num), "%i", value);
+	Com_sprintf(num, sizeof (num), "%i", value);
 	l = strlen(num);
 	if (l > width)
 		l = width;
@@ -248,7 +248,7 @@ static void CG_DrawField (float x, float y, int width, int value, float char_wid
 		else
 			frame = *ptr - '0';
 
-		CG_DrawPic(x,y, char_width, char_height, cgs.media.numberShaders[frame]);
+		CG_DrawPic(x, y, char_width, char_height, cgs.media.numberShaders[frame]);
 		x += char_width;
 		ptr++;
 		l--;
