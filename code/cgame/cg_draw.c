@@ -202,7 +202,7 @@ Draws large numbers for status bar and powerups
  */
 #ifndef MISSIONPACK
 
-static void CG_DrawField(int x, int y, int width, int value) {
+static void CG_DrawField (float x, float y, int width, int value, float char_width, float char_height) {
 	char num[16], *ptr;
 	int l;
 	int frame;
@@ -216,7 +216,7 @@ static void CG_DrawField(int x, int y, int width, int value) {
 		width = 5;
 	}
 
-	switch (width) {
+	switch ( width ) {
 		case 1:
 			value = value > 9 ? 9 : value;
 			value = value < 0 ? 0 : value;
@@ -235,11 +235,11 @@ static void CG_DrawField(int x, int y, int width, int value) {
 			break;
 	}
 
-	Com_sprintf(num, sizeof (num), "%i", value);
+	Com_sprintf (num, sizeof (num), "%i", value);
 	l = strlen(num);
 	if (l > width)
 		l = width;
-	x += 2 + CHAR_WIDTH * (width - l);
+	x += char_width*(width - l);
 
 	ptr = num;
 	while (*ptr && l) {
@@ -248,8 +248,8 @@ static void CG_DrawField(int x, int y, int width, int value) {
 		else
 			frame = *ptr - '0';
 
-		CG_DrawPic(x, y, CHAR_WIDTH, CHAR_HEIGHT, cgs.media.numberShaders[frame]);
-		x += CHAR_WIDTH;
+		CG_DrawPic(x,y, char_width, char_height, cgs.media.numberShaders[frame]);
+		x += char_width;
 		ptr++;
 		l--;
 	}
@@ -566,6 +566,38 @@ void CG_DrawTeamBackground(int x, int y, int w, int h, float alpha, int team) {
 
 /*
 ================
+CG_GetWeaponColors
+
+================
+ */
+
+static vec4_t weaponColors[WP_NUM_WEAPONS] =
+	{
+	{ 1.0, 1.0, 1.0, 1.0 }, // WP_NONE
+	{ 0.0, 0.8, 1.0, 1.0 }, // WP_GAUNTLET,
+	{ 1.0, 1.0, 0.0, 1.0 }, // WP_MACHINEGUN,
+	{ 1.0, 0.4, 0.0, 1.0 }, // WP_SHOTGUN,
+	{ 0.0, 0.6, 0.0, 1.0 }, // WP_GRENADE_LAUNCHER,
+	{ 1.0, 0.0, 0.0, 1.0 }, // WP_ROCKET_LAUNCHER,
+	{ 1.0, 1.0, 0.6, 1.0 }, // WP_LIGHTNING,
+	{ 0.0, 1.0, 0.0, 1.0 }, // WP_RAILGUN,
+	{ 1.0, 0.0, 1.0, 1.0 }, // WP_PLASMAGUN,
+	{ 0.0, 0.4, 1.0, 1.0 }, // WP_BFG,
+	{ 0.4, 0.6, 0.0, 1.0 }, // WP_GRAPPLING_HOOK,
+	{ 1.0, 0.6, 0.6, 1.0 }, // WP_NAILGUN,
+	{ 1.0, 0.6, 0.4, 1.0 }, // WP_PROX_LAUNCHER,
+	{ 0.8, 0.8, 0.8, 1.0 }, // WP_CHAINGUN,
+	};
+
+static float *CG_GetWeaponColor(int weapon) {
+	if (weapon <= WP_NONE || weapon >= WP_NUM_WEAPONS) {
+		return weaponColors[0];
+	}
+	return weaponColors[weapon];
+}
+
+/*
+================
 CG_DrawStatusBar
 
 ================
@@ -577,6 +609,7 @@ static void CG_DrawStatusBar(void) {
 	centity_t *cent;
 	playerState_t *ps;
 	int value;
+	int weaponSelect = CG_GetWeaponSelect();
 	vec4_t hcolor;
 	vec3_t angles;
 	vec3_t origin;
@@ -652,13 +685,42 @@ static void CG_DrawStatusBar(void) {
 
 
 	//
+	// ammo
+	//
+	if (cent->currentState.weapon) {
+		value = ps->ammo[weaponSelect];
+		if (value > -1) {
+			if (cg.predictedPlayerState.weaponstate == WEAPON_FIRING
+					&& cg.predictedPlayerState.weaponTime > 100) {
+				// draw as dark grey when reloading
+				trap_R_SetColor(colors[2]); // dark grey
+			} else {
+				trap_R_SetColor(CG_GetWeaponColor(weaponSelect));
+			}
+
+			CG_DrawField(0, 455, 3, value, SMALL_CHAR_WIDTH, SMALL_CHAR_HEIGHT);
+			trap_R_SetColor(NULL);
+
+			// draw a 2D icon for ammo
+			if (cg_drawIcons.integer) {
+				qhandle_t icon;
+
+				icon = cg_weapons[ weaponSelect ].ammoIcon;
+				if (icon) {
+					CG_DrawPic(SMALL_CHAR_WIDTH * 3 + TEXT_ICON_SPACE, 455, ICON_SIZE / 2, ICON_SIZE / 2, icon);
+				}
+			}
+		}
+	}
+
+	//
 	// health
 	//
 	value = ps->stats[STAT_HEALTH];
 	if (value > 100) {
-		trap_R_SetColor(colors[3]); // white
+		trap_R_SetColor(colors[4]); // green
 	} else if (value > 25) {
-		trap_R_SetColor(colors[0]); // green
+		trap_R_SetColor(colors[3]); // white
 	} else if (value > 0) {
 		color = (cg.time >> 8) & 1; // flash
 		trap_R_SetColor(colors[color]);
@@ -667,7 +729,7 @@ static void CG_DrawStatusBar(void) {
 	}
 
 	// stretch the health up when taking damage
-	CG_DrawField(185, 432, 3, value);
+	CG_DrawField(185, 432, 3, value, CHAR_WIDTH, CHAR_HEIGHT);
 	CG_ColorForHealth(hcolor);
 	trap_R_SetColor(hcolor);
 	// if we didn't draw a 3D icon, draw a 2D icon for health
@@ -680,9 +742,17 @@ static void CG_DrawStatusBar(void) {
 	// armor
 	//
 	value = ps->stats[STAT_ARMOR];
-	if (value > 0) {
-		trap_R_SetColor(colors[0]);
-		CG_DrawField(355, 432, 3, value);
+	if (value > 100) {
+		trap_R_SetColor(colors[0]); // yellow
+		CG_DrawField(355, 432, 3, value, CHAR_WIDTH, CHAR_HEIGHT);
+		trap_R_SetColor(NULL);
+		// if we didn't draw a 3D icon, draw a 2D icon for armor
+		if (!cg_draw3dIcons.integer && cg_drawIcons.integer) {
+			CG_DrawPic(355 + CHAR_WIDTH * 3 + TEXT_ICON_SPACE, 432, ICON_SIZE, ICON_SIZE, cgs.media.armorIcon);
+		}
+	} else if (value > 0) {
+		trap_R_SetColor(colors[3]); // white
+		CG_DrawField(355, 432, 3, value, CHAR_WIDTH, CHAR_HEIGHT);
 		trap_R_SetColor(NULL);
 		// if we didn't draw a 3D icon, draw a 2D icon for armor
 		if (!cg_draw3dIcons.integer && cg_drawIcons.integer) {
@@ -696,7 +766,7 @@ static void CG_DrawStatusBar(void) {
 		value = ps->generic1;
 		if (value > 0) {
 			trap_R_SetColor(colors[0]);
-			CG_DrawField(470, 432, 3, value);
+			CG_DrawField(470, 432, 3, value, CHAR_WIDTH, CHAR_HEIGHT);
 			trap_R_SetColor(NULL);
 			// if we didn't draw a 3D icon, draw a 2D icon for skull
 			if (!cg_draw3dIcons.integer && cg_drawIcons.integer) {
@@ -1871,7 +1941,7 @@ static float CG_DrawPowerups(float y) {
 			y -= ICON_SIZE;
 
 			trap_R_SetColor(colors[color]);
-			CG_DrawField(x, y, 2, sortedTime[ i ] / 1000);
+			CG_DrawField(x, y, 2, sortedTime[ i ] / 1000, CHAR_WIDTH, CHAR_HEIGHT);
 
 			t = ps->powerups[ sorted[i] ];
 			if (t - cg.time >= POWERUP_BLINKS * POWERUP_BLINK_TIME) {
@@ -1948,8 +2018,8 @@ static int CG_DrawPickupItem(int y) {
 		if (fadeColor) {
 			CG_RegisterItemVisuals(value);
 			trap_R_SetColor(fadeColor);
-			CG_DrawPic(8, y, ICON_SIZE, ICON_SIZE, cg_items[ value ].icon);
-			CG_DrawBigString(ICON_SIZE + 16, y + (ICON_SIZE / 2 - BIGCHAR_HEIGHT / 2), bg_itemlist[ value ].pickup_name, fadeColor[0]);
+			CG_DrawPic(8, y, ICON_SIZE / 2, ICON_SIZE / 2, cg_items[ value ].icon);
+			CG_DrawBigString(ICON_SIZE / 2.25 + 16, y + (ICON_SIZE / 6.75 - BIGCHAR_HEIGHT / 6.75), bg_itemlist[ value ].pickup_name, fadeColor[0]);
 			trap_R_SetColor(NULL);
 		}
 	}

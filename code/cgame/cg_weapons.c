@@ -1192,6 +1192,10 @@ static void CG_CalculateWeaponPosition( vec3_t origin, vec3_t angles )
 	VectorCopy( cg.refdef.vieworg, origin );
 	VectorCopy( cg.refdefViewAngles, angles );
 
+	if (!cg_bobgun.integer) {
+		return;
+	}
+
 	// on odd legs, invert some angles
 	if ( cg.bobcycle & 1 ) {
 		scale = -cg.xyspeed;
@@ -2256,6 +2260,11 @@ WEAPON SELECTION
 ==============================================================================
 */
 
+int CG_GetWeaponSelect( void ) {
+	return ((cg.snap->ps.pm_flags & PMF_FOLLOW) || cg.demoPlayback) ? 
+		cg.predictedPlayerState.weapon : cg.weaponSelect;
+}
+
 /*
 ===================
 CG_DrawWeaponSelect
@@ -2293,7 +2302,7 @@ void CG_DrawWeaponSelect( void )
 	trap_R_SetColor( color );
 
 	// showing weapon select clears pickup item display, but not the blend blob
-	cg.itemPickupTime = 0;
+	//cg.itemPickupTime = 0;
 
 	// count the number of weapons owned
 	bits = cg.snap->ps.stats[ STAT_WEAPONS ];

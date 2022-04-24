@@ -305,6 +305,9 @@ vmCvar_t cg_missionpackChecks;
 vmCvar_t cg_developer;
 /* /Neon_Knight */
 
+//OmegA
+vmCvar_t cg_bobgun;
+
 typedef struct {
 	vmCvar_t *vmCvar;
 	char *cvarName;
@@ -521,8 +524,11 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_missionpackChecks, "missionpackChecks", "1", CVAR_ARCHIVE},
 /* /Neon_Knight */
 /* Neon_Knight: Enables MP checks. */
-	{ &cg_developer, "developer", "0", CVAR_CHEAT}
+	{ &cg_developer, "developer", "0", CVAR_CHEAT},
 /* /Neon_Knight */
+
+	//OmegA
+	{ &cg_bobgun, "cg_bobgun", "0", CVAR_ARCHIVE}
 };
 
 static int cvarTableSize = sizeof ( cvarTable) / sizeof ( cvarTable[0]);

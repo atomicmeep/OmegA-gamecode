@@ -65,6 +65,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define STAT_MINUS			10	// num frame for '-' stats digit
 
 #define	ICON_SIZE			48
+#define	SMALL_CHAR_WIDTH		16
+#define	SMALL_CHAR_HEIGHT		24
 #define	CHAR_WIDTH			32
 #define	CHAR_HEIGHT			48
 #define	TEXT_ICON_SPACE		4
@@ -1483,6 +1485,8 @@ extern vmCvar_t cg_leiChibi;
 /* Neon_Knight: Developer mode. */
 extern vmCvar_t cg_developer;
 /* /Neon_Knight */
+//OmegA
+extern vmCvar_t	cg_bobgun;
 
 //unlagged - cg_unlagged.c
 void CG_PredictWeaponEffects( centity_t *cent );
@@ -1693,6 +1697,7 @@ void CG_DrawWeaponBar5(int count, int bits, float *color);
 void CG_DrawWeaponBar6(int count, int bits, float *color);
 void CG_DrawWeaponBar7(int count, int bits, float *color);
 void CG_DrawWeaponBar8(int count, int bits, float *color);
+int CG_GetWeaponSelect( void );
 
 void CG_OutOfAmmoChange( void );	// should this be in pmove?
 

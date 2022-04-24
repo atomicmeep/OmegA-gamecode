@@ -344,9 +344,6 @@ static cvarTable_t gameCvarTable[] = {
 
 	{ &g_awardpushing, "g_awardpushing", "1", CVAR_ARCHIVE, 0, qtrue },
 
-	//OmegA
-	{ &g_railjump, "g_railjump", "1", 0, 0, qtrue  },
-
 	//g_persistantpowerups
 #ifdef MISSIONPACK
 	{ &g_runes, "g_runes", "1", CVAR_LATCH, 0, qfalse },
@@ -417,7 +414,10 @@ static cvarTable_t gameCvarTable[] = {
 	/* Neon_Knight: Developer mode*/
 	{ &g_developer, "developer", "0", CVAR_CHEAT, 0, qtrue},
 	{ &g_spSkill, "g_spSkill", "2", 0, 0, qtrue},
-	{ &g_bot_noChat, "bot_nochat", "0", 0, 0, qtrue}
+	{ &g_bot_noChat, "bot_nochat", "0", 0, 0, qtrue},
+
+	//OmegA
+	{ &g_railjump, "g_railjump", "1", 0, 0, qtrue  }
 
 };
 
