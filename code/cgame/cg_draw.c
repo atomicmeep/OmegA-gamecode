@@ -698,7 +698,7 @@ static void CG_DrawStatusBar(void) {
 				trap_R_SetColor(CG_GetWeaponColor(weaponSelect));
 			}
 
-			CG_DrawField(0, 455, 3, value, SMALL_CHAR_WIDTH, SMALL_CHAR_HEIGHT);
+			CG_DrawField(0, 455, 3, value, AMMO_CHAR_WIDTH, AMMO_CHAR_HEIGHT);
 			trap_R_SetColor(NULL);
 
 			// draw a 2D icon for ammo
@@ -707,7 +707,7 @@ static void CG_DrawStatusBar(void) {
 
 				icon = cg_weapons[ weaponSelect ].ammoIcon;
 				if (icon) {
-					CG_DrawPic(SMALL_CHAR_WIDTH * 3 + TEXT_ICON_SPACE, 455, ICON_SIZE / 2, ICON_SIZE / 2, icon);
+					CG_DrawPic(AMMO_CHAR_WIDTH * 3 + TEXT_ICON_SPACE, 455, ICON_SIZE / 2, ICON_SIZE / 2, icon);
 				}
 			}
 		}
