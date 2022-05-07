@@ -60,6 +60,7 @@ GAME OPTIONS MENU
 #define ID_CROSSHAIRHEALTH      144
 #define ID_CHATBEEP             145
 #define ID_TEAMCHATBEEP         146
+#define ID_AUTOSWITCH           147
 
 #undef NUM_CROSSHAIRS
 #define	NUM_CROSSHAIRS			99
@@ -94,6 +95,7 @@ typedef struct {
 	menuradiobutton_s	allowdownload;
 	menuradiobutton_s       chatbeep;
 	menuradiobutton_s       teamchatbeep;
+	menuradiobutton_s       autoswitch;
 	menubitmap_s		back;
 
 	qhandle_t			crosshairShader[NUM_CROSSHAIRS];
@@ -130,6 +132,7 @@ static void Preferences_SetMenuItems( void ) {
 	s_preferences.delaghitscan.curvalue	= trap_Cvar_VariableValue( "cg_delag" ) != 0;
 	s_preferences.chatbeep.curvalue         = trap_Cvar_VariableValue( "cg_chatBeep" ) != 0;
 	s_preferences.teamchatbeep.curvalue     = trap_Cvar_VariableValue( "cg_teamChatBeep" ) != 0;
+	s_preferences.autoswitch.curvalue       = trap_Cvar_VariableValue( "cg_autoswitch" ) != 0;
 }
 
 static void Preferences_Event( void* ptr, int notification ) {
@@ -232,6 +235,10 @@ static void Preferences_Event( void* ptr, int notification ) {
 
 	case ID_TEAMCHATBEEP:
 		trap_Cvar_SetValue( "cg_teamChatBeep", s_preferences.teamchatbeep.curvalue );
+		break;
+
+	case ID_AUTOSWITCH:
+		trap_Cvar_SetValue( "cg_autoswitch", s_preferences.autoswitch.curvalue );
 		break;
 
 	case ID_BACK:
@@ -434,6 +441,7 @@ static void Preferences_MenuInit( void ) {
 	Preferences_Menu_AddBoolean(&s_preferences.allowdownload, &y, ID_ALLOWDOWNLOAD, "Automatic Downloading:");
 	Preferences_Menu_AddBoolean(&s_preferences.chatbeep, &y, ID_CHATBEEP, "Beep on chat:");
 	Preferences_Menu_AddBoolean(&s_preferences.teamchatbeep, &y, ID_TEAMCHATBEEP, "Beep on team chat:");
+	Preferences_Menu_AddBoolean(&s_preferences.autoswitch, &y, ID_AUTOSWITCH, "Automatic Weapons Switching:");
 	
 	s_preferences.back.generic.type	    = MTYPE_BITMAP;
 	s_preferences.back.generic.name     = ART_BACK0;
@@ -469,6 +477,7 @@ static void Preferences_MenuInit( void ) {
 	Menu_AddItem( &s_preferences.menu, &s_preferences.allowdownload );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.chatbeep );
 	Menu_AddItem( &s_preferences.menu, &s_preferences.teamchatbeep );
+	Menu_AddItem( &s_preferences.menu, &s_preferences.autoswitch );
 
 	Menu_AddItem( &s_preferences.menu, &s_preferences.back );
 

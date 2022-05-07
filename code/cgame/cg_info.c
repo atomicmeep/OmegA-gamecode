@@ -152,6 +152,7 @@ void CG_DrawInformation( void ) {
 	int			y;
 	int			value;
 	qhandle_t	levelshot;
+	qhandle_t	omega;
 	qhandle_t	detail;
 	char		buf[1024];
 
@@ -169,6 +170,10 @@ void CG_DrawInformation( void ) {
 	// blend a detail texture over it
 	detail = trap_R_RegisterShader( "levelShotDetail" );
 	trap_R_DrawStretchPic( 0, 0, cgs.glconfig.vidWidth, cgs.glconfig.vidHeight, 0, 0, 2.5, 2, detail );
+
+	// draw OmegA icon
+	omega = trap_R_RegisterShaderNoMip( "gfx/2d/omega_icon" );
+	CG_DrawPic( 585, 425, ICON_SIZE, ICON_SIZE, omega );
 
 	// draw the icons of things as they are loaded
 	CG_DrawLoadingIcons();
