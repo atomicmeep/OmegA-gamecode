@@ -434,18 +434,20 @@ static void CG_OffsetFirstPersonView( void ) {
 	// add angles based on weapon kick
 	VectorAdd (angles, cg.kick_angles, angles);
 
-	// add angles based on damage kick
-	if ( cg.damageTime && !CG_IsARoundBasedGametype(cgs.gametype)) {
-		ratio = cg.time - cg.damageTime;
-		if ( ratio < DAMAGE_DEFLECT_TIME ) {
-			ratio /= DAMAGE_DEFLECT_TIME;
-			angles[PITCH] += ratio * cg.v_dmg_pitch * cg_kickScale.value;
-			angles[ROLL] += ratio * cg.v_dmg_roll * cg_kickScale.value;
-		} else {
-			ratio = 1.0 - ( ratio - DAMAGE_DEFLECT_TIME ) / DAMAGE_RETURN_TIME;
-			if ( ratio > 0 ) {
+	if ( cg_screenshake.integer ) {
+		// add angles based on damage kick
+		if ( cg.damageTime && !CG_IsARoundBasedGametype(cgs.gametype)) {
+			ratio = cg.time - cg.damageTime;
+			if ( ratio < DAMAGE_DEFLECT_TIME ) {
+				ratio /= DAMAGE_DEFLECT_TIME;
 				angles[PITCH] += ratio * cg.v_dmg_pitch * cg_kickScale.value;
 				angles[ROLL] += ratio * cg.v_dmg_roll * cg_kickScale.value;
+			} else {
+				ratio = 1.0 - ( ratio - DAMAGE_DEFLECT_TIME ) / DAMAGE_RETURN_TIME;
+				if ( ratio > 0 ) {
+					angles[PITCH] += ratio * cg.v_dmg_pitch * cg_kickScale.value;
+					angles[ROLL] += ratio * cg.v_dmg_roll * cg_kickScale.value;
+				}
 			}
 		}
 	}

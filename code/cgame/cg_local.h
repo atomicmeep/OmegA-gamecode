@@ -848,6 +848,8 @@ typedef struct {
 
 	qhandle_t	smokePuffShader;
 	qhandle_t	smokePuffRageProShader;
+	qhandle_t	blueSmokePuffShader;
+	qhandle_t	redSmokePuffShader;
 	qhandle_t	shotgunSmokePuffShader;
 	qhandle_t	plasmaBallShader;
 	qhandle_t	waterBubbleShader;
@@ -1487,6 +1489,7 @@ extern vmCvar_t cg_developer;
 /* /Neon_Knight */
 //OmegA
 extern vmCvar_t	cg_bobgun;
+extern vmCvar_t	cg_screenshake;
 
 //unlagged - cg_unlagged.c
 void CG_PredictWeaponEffects( centity_t *cent );
@@ -1522,6 +1525,8 @@ float CG_GetCVar(const char *cvar);
 void SnapVectorTowards( vec3_t v, vec3_t to );
 
 void CG_FairCvars( void );
+
+void CG_SetDefaultsCvars( void );
 
 //
 // cg_view.c

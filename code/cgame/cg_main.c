@@ -307,6 +307,8 @@ vmCvar_t cg_developer;
 
 //OmegA
 vmCvar_t cg_bobgun;
+vmCvar_t cg_omegaInitialized;
+vmCvar_t cg_screenshake;
 
 typedef struct {
 	vmCvar_t *vmCvar;
@@ -342,7 +344,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_crosshairHealth, "cg_crosshairHealth", "1", CVAR_ARCHIVE},
 	{ &cg_crosshairX, "cg_crosshairX", "0", CVAR_ARCHIVE},
 	{ &cg_crosshairY, "cg_crosshairY", "0", CVAR_ARCHIVE},
-	{ &cg_brassTime, "cg_brassTime", "2500", CVAR_ARCHIVE},
+	{ &cg_brassTime, "cg_brassTime", "0", CVAR_ARCHIVE},
 	{ &cg_simpleItems, "cg_simpleItems", "0", CVAR_ARCHIVE},
 	{ &cg_addMarks, "cg_marks", "1", CVAR_ARCHIVE},
 	{ &cg_lagometer, "cg_lagometer", "1", CVAR_ARCHIVE},
@@ -476,7 +478,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	//	{ &cg_latentCmds, "cg_latentCmds", "0", CVAR_USERINFO | CVAR_CHEAT },
 	//	{ &cg_plOut, "cg_plOut", "0", CVAR_USERINFO | CVAR_CHEAT },
 	//unlagged - client options
-	{ &cg_trueLightning, "cg_trueLightning", "0.0", CVAR_ARCHIVE},
+	{ &cg_trueLightning, "cg_trueLightning", "1.0", CVAR_ARCHIVE},
 	{ &cg_music, "cg_music", "", CVAR_ARCHIVE},
 	//	{ &cg_pmove_fixed, "cg_pmove_fixed", "0", CVAR_USERINFO | CVAR_ARCHIVE }
 
@@ -528,7 +530,9 @@ static cvarTable_t cvarTable[] = {// bk001129
 /* /Neon_Knight */
 
 	//OmegA
-	{ &cg_bobgun, "cg_bobgun", "0", CVAR_ARCHIVE}
+	{ &cg_bobgun, "cg_bobgun", "0", CVAR_ARCHIVE},
+	{ &cg_omegaInitialized, "cg_omegaInitialized", "0", CVAR_ARCHIVE},
+	{ &cg_screenshake, "cg_screenshake", "0", CVAR_ARCHIVE}
 };
 
 static int cvarTableSize = sizeof ( cvarTable) / sizeof ( cvarTable[0]);
@@ -565,6 +569,18 @@ void CG_RegisterCvars(void) {
 
 /*																																			
 ===================
+CG_Initialize
+===================
+ */
+void CG_Initialize(void)  {
+	if (cg_omegaInitialized.integer == 0) {
+		CG_SetDefaultsCvars();
+		trap_Cvar_Set( "cg_omegaInitialized", "1" );
+	}
+}
+
+/*																																			
+===================
 CG_ForceModelChange
 ===================
  */
@@ -579,6 +595,21 @@ static void CG_ForceModelChange(void) {
 			continue;
 		}
 		CG_NewClientInfo(i);
+	}
+}
+
+/*
+=================
+CG_SetDefaultsCvars
+=================
+ */
+void CG_SetDefaultsCvars( void ) {
+	int i;
+	cvarTable_t *cv;
+
+	for ( i = 0, cv = cvarTable ; i < cvarTableSize ; i++, cv++ ) {
+		trap_Cvar_Set( cv->cvarName, cv->defaultString );
+		trap_Cvar_Update( cv->vmCvar );
 	}
 }
 
@@ -1123,6 +1154,8 @@ static void CG_RegisterGraphics(void) {
 
 	cgs.media.smokePuffShader = trap_R_RegisterShader("smokePuff");
 	cgs.media.smokePuffRageProShader = trap_R_RegisterShader("smokePuffRagePro");
+	cgs.media.blueSmokePuffShader = trap_R_RegisterShader("blueSmokePuff");
+	cgs.media.redSmokePuffShader = trap_R_RegisterShader("redSmokePuff");
 	cgs.media.shotgunSmokePuffShader = trap_R_RegisterShader("shotgunSmokePuff");
 	cgs.media.nailPuffShader = trap_R_RegisterShader("nailtrail");
 	cgs.media.blueProxMine = trap_R_RegisterModel("models/weaphits/proxmineb.md3");
@@ -2412,6 +2445,8 @@ void CG_Init(int serverMessageNum, int serverCommandSequence, int clientNum) {
 	cgs.media.charsetPropB = trap_R_RegisterShaderNoMip("menu/art/font2_prop.tga");
 
 	CG_RegisterCvars();
+
+	CG_Initialize();
 
 	CG_InitConsoleCommands();
 	// loadingscreen

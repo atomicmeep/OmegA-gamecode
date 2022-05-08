@@ -425,14 +425,34 @@ static void CG_OldRocketTrail( centity_t *ent, const weaponInfo_t *wi )
 	for ( ; t <= ent->trailTime ; t += step ) {
 		BG_EvaluateTrajectory( &es->pos, t, lastPos );
 
-		smoke = CG_SmokePuff( lastPos, up,
+		if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_BLUE) {
+			smoke = CG_SmokePuff( lastPos, up,
 		                      wi->trailRadius,
 		                      1, 1, 1, 0.33f,
 		                      wi->wiTrailTime,
 		                      t,
 		                      0,
 		                      0,
-		                      cgs.media.smokePuffShader );
+		                      cgs.media.blueSmokePuffShader );
+		} else if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_RED) {
+			smoke = CG_SmokePuff( lastPos, up,
+		                      wi->trailRadius,
+		                      1, 1, 1, 0.33f,
+		                      wi->wiTrailTime,
+		                      t,
+		                      0,
+		                      0,
+		                      cgs.media.redSmokePuffShader );
+		} else {
+			smoke = CG_SmokePuff( lastPos, up,
+		                      wi->trailRadius,
+		                      1, 1, 1, 0.33f,
+		                      wi->wiTrailTime,
+		                      t,
+		                      0,
+		                      0,
+		                      cgs.media.shotgunSmokePuffShader );
+		}
 		// use the optimized local entity add
 		smoke->leType = LE_SCALE_FADE;
 	}
@@ -784,7 +804,7 @@ static void CG_PlasmaTrail( centity_t *ent, const weaponInfo_t *wi )
 
 static void CG_GrenadeTrail( centity_t *ent, const weaponInfo_t *wi )
 {
-	CG_RocketTrail( ent, wi );
+	CG_OldRocketTrail( ent, wi );
 }
 
 
@@ -1342,36 +1362,36 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin )
 	else
 //unlagged - attack prediction #1
 
-		// CPMA  "true" lightning
-		if ((cent->currentState.number == cg.predictedPlayerState.clientNum) && (cg_trueLightning.value != 0)) {
-			vec3_t angle;
-			int i;
+	// CPMA  "true" lightning
+	if ((cent->currentState.number == cg.predictedPlayerState.clientNum) && (cg_trueLightning.value != 0)) {
+		vec3_t angle;
+		int i;
 
 //unlagged - true lightning
-			// might as well fix up true lightning while we're at it
-			vec3_t viewangles;
-			VectorCopy( cg.predictedPlayerState.viewangles, viewangles );
+		// might as well fix up true lightning while we're at it
+		//vec3_t viewangles;
+		//VectorCopy( cg.predictedPlayerState.viewangles, viewangles );
 //unlagged - true lightning
 
-			for (i = 0; i < 3; i++) {
-				float a = cent->lerpAngles[i] - viewangles[i]; //unlagged: was cg.refdefViewAngles[i];
-				if (a > 180) {
-					a -= 360;
-				}
-				if (a < -180) {
-					a += 360;
-				}
-
-				angle[i] = viewangles[i] /*unlagged: was cg.refdefViewAngles[i]*/ + a * (1.0 - cg_trueLightning.value);
-				if (angle[i] < 0) {
-					angle[i] += 360;
-				}
-				if (angle[i] > 360) {
-					angle[i] -= 360;
-				}
+		for (i = 0; i < 3; i++) {
+			float a = cent->lerpAngles[i] - cg.refdefViewAngles[i];
+			if (a > 180) {
+				a -= 360;
+			}
+			if (a < -180) {
+				a += 360;
 			}
 
-			AngleVectors(angle, forward, NULL, NULL );
+			angle[i] = cg.refdefViewAngles[i] + a * (1.0 - cg_trueLightning.value);
+			if (angle[i] < 0) {
+				angle[i] += 360;
+			}
+			if (angle[i] > 360) {
+				angle[i] -= 360;
+			}
+		}
+
+		AngleVectors(angle, forward, NULL, NULL );
 //unlagged - true lightning
 //		VectorCopy(cent->lerpOrigin, muzzlePoint );
 //		VectorCopy(cg.refdef.vieworg, muzzlePoint );
@@ -1426,6 +1446,12 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin )
 		angles[1] = rand() % 360;
 		angles[2] = rand() % 360;
 		AnglesToAxis( angles, beam.axis );
+
+		// scale down crackle
+		beam.nonNormalizedAxes = qtrue;
+		VectorScale(beam.axis[0], 0.5, beam.axis[0]);
+		VectorScale(beam.axis[1], 0.5, beam.axis[1]);
+		VectorScale(beam.axis[2], 0.5, beam.axis[2]);
 		trap_R_AddRefEntityToScene( &beam );
 	}
 }
