@@ -30,6 +30,8 @@ displayContextDef_t cgDC;
 #endif
 
 int forceModelModificationCount = -1;
+int enemyModelModificationCount = -1;
+int teamModelModificationCount = -1;
 
 void CG_Init(int serverMessageNum, int serverCommandSequence, int clientNum);
 void CG_Shutdown(void);
@@ -307,6 +309,9 @@ vmCvar_t cg_developer;
 
 //OmegA
 vmCvar_t cg_bobgun;
+vmCvar_t cg_brightPlayers;
+vmCvar_t cg_enemyModel;
+vmCvar_t cg_teamModel;
 vmCvar_t cg_omegaInitialized;
 vmCvar_t cg_screenshake;
 
@@ -531,6 +536,9 @@ static cvarTable_t cvarTable[] = {// bk001129
 
 	//OmegA
 	{ &cg_bobgun, "cg_bobgun", "0", CVAR_ARCHIVE},
+	{ &cg_brightPlayers, "cg_brightPlayers", "0", CVAR_ARCHIVE},
+	{ &cg_enemyModel, "cg_enemyModel", "", CVAR_ARCHIVE},
+	{ &cg_teamModel, "cg_teamModel", "", CVAR_ARCHIVE},
 	{ &cg_omegaInitialized, "cg_omegaInitialized", "0", CVAR_ARCHIVE},
 	{ &cg_screenshake, "cg_screenshake", "0", CVAR_ARCHIVE}
 };
@@ -557,6 +565,8 @@ void CG_RegisterCvars(void) {
 	cgs.localServer = atoi(var);
 
 	forceModelModificationCount = cg_forceModel.modificationCount;
+	enemyModelModificationCount = cg_enemyModel.modificationCount;
+	teamModelModificationCount = cg_teamModel.modificationCount;
 
 	trap_Cvar_Register(NULL, "model", DEFAULT_MODEL, CVAR_USERINFO | CVAR_ARCHIVE);
 	trap_Cvar_Register(NULL, "headmodel", DEFAULT_MODEL, CVAR_USERINFO | CVAR_ARCHIVE);
@@ -671,6 +681,14 @@ void CG_UpdateCvars(void) {
 	// if force model changed
 	if (forceModelModificationCount != cg_forceModel.modificationCount) {
 		forceModelModificationCount = cg_forceModel.modificationCount;
+		CG_ForceModelChange();
+	}
+	if (enemyModelModificationCount != cg_enemyModel.modificationCount) {
+		enemyModelModificationCount = enemyModelModificationCount;
+		CG_ForceModelChange();
+	}
+	if (teamModelModificationCount != cg_teamModel.modificationCount) {
+		teamModelModificationCount = teamModelModificationCount;
 		CG_ForceModelChange();
 	}
 }
@@ -1217,6 +1235,11 @@ static void CG_RegisterGraphics(void) {
 	} else {
 		cgs.media.neutralOverlay = trap_R_RegisterShader("playeroverlays/playerSuit1_Neutral");
 	}
+
+	// bright players shader
+	cgs.media.brightRedPlayers = trap_R_RegisterShader( "brightRedPlayers");
+	cgs.media.brightBluePlayers = trap_R_RegisterShader( "brightBluePlayers");
+	cgs.media.brightPlayers = trap_R_RegisterShader( "brightPlayers");
 
 	//For Double Domination:
 	if (cgs.gametype == GT_DOUBLE_D) {

@@ -913,6 +913,9 @@ typedef struct {
         qhandle_t       neutralOverlay;
         qhandle_t       redOverlay;
         qhandle_t       blueOverlay;
+	qhandle_t       brightPlayers;
+	qhandle_t       brightRedPlayers;
+	qhandle_t       brightBluePlayers;
 
 	// weapon effect models
 	qhandle_t	bulletFlashModel;
@@ -1489,6 +1492,9 @@ extern vmCvar_t cg_developer;
 /* /Neon_Knight */
 //OmegA
 extern vmCvar_t	cg_bobgun;
+extern vmCvar_t	cg_brightPlayers;
+extern vmCvar_t cg_enemyModel;
+extern vmCvar_t cg_teamModel;
 extern vmCvar_t	cg_screenshake;
 
 //unlagged - cg_unlagged.c

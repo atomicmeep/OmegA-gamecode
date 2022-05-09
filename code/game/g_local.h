@@ -1179,6 +1179,7 @@ extern vmCvar_t g_developer;
 extern vmCvar_t g_spSkill;
 extern vmCvar_t g_bot_noChat;
 //OmegA
+extern vmCvar_t g_delagMissiles;
 extern vmCvar_t g_railjump;
 
 void	trap_Printf( const char *fmt );

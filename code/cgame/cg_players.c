@@ -695,7 +695,7 @@ static qboolean CG_RegisterClientModelname(clientInfo_t *ci, const char *modelNa
 					Com_sprintf(filename, sizeof ( filename), "models/players/characters/%s/lower.md3", modelName);
 					ci->legsModel = trap_R_RegisterModel(filename);
 					if (!ci->legsModel) {
-						Com_Printf("Failed to load model file %s\n", filename);
+						//Com_Printf("Failed to load model file %s\n", filename);
 						return qfalse;
 					}
 				}
@@ -1085,6 +1085,9 @@ void CG_NewClientInfo(int clientNum) {
 	const char *configstring;
 	const char *v;
 	char *slash;
+	const char *local_config;
+	int local_team;
+	qboolean enemy = qfalse;
 
 	ci = &cgs.clientinfo[clientNum];
 
@@ -1093,6 +1096,10 @@ void CG_NewClientInfo(int clientNum) {
 		memset(ci, 0, sizeof ( *ci));
 		return; // player just left
 	}
+
+	local_config = CG_ConfigString(cg.clientNum + CS_PLAYERS);
+	v = Info_ValueForKey(local_config, "t");
+	local_team = atoi(v);
 
 	// build into a temp buffer so the defer checks can use
 	// the old value
@@ -1145,7 +1152,35 @@ void CG_NewClientInfo(int clientNum) {
 
 	// model
 	v = Info_ValueForKey(configstring, "model");
-	if (cg_forceModel.integer) {
+
+	if (CG_IsATeamGametype(cgs.gametype)) {
+		if (local_team != newInfo.team)
+			enemy = 1;
+		else
+			enemy = 0;
+	} else {
+		if (cg.clientNum == clientNum) {
+			enemy = 0;
+		} else {
+			enemy = 1;
+		}
+	}
+
+	if ((enemy && cg_enemyModel.string[0]) || (!enemy && cg_teamModel.string[0])) {
+		if (enemy) {
+			Q_strncpyz( newInfo.modelName, cg_enemyModel.string, sizeof( newInfo.modelName ) );
+		} else {
+			Q_strncpyz( newInfo.modelName, cg_teamModel.string, sizeof( newInfo.modelName ) );
+		}
+
+		slash = strchr( newInfo.modelName, '/' );
+		if ( !slash ) {
+			Q_strncpyz( newInfo.skinName, "default", sizeof( newInfo.skinName ) );
+		} else {
+			Q_strncpyz( newInfo.skinName, slash + 1, sizeof( newInfo.skinName ) );
+			*slash = 0;
+		}
+	} else if (cg_forceModel.integer) {
 		// forcemodel makes everyone use a single model
 		// to prevent load hitches
 		char modelStr[MAX_QPATH];
@@ -1192,7 +1227,21 @@ void CG_NewClientInfo(int clientNum) {
 
 	// head model
 	v = Info_ValueForKey(configstring, "hmodel");
-	if (cg_forceModel.integer) {
+	if ((enemy && cg_enemyModel.string[0]) || (!enemy && cg_teamModel.string[0])) {
+		if (enemy) {
+			Q_strncpyz( newInfo.headModelName, cg_enemyModel.string, sizeof( newInfo.headModelName ) );
+		} else {
+			Q_strncpyz( newInfo.headModelName, cg_teamModel.string, sizeof( newInfo.headModelName ) );
+		}
+
+		slash = strchr( newInfo.headModelName, '/' );
+		if ( !slash ) {
+			Q_strncpyz( newInfo.headSkinName, "default", sizeof( newInfo.headSkinName ) );
+		} else {
+			Q_strncpyz( newInfo.headSkinName, slash + 1, sizeof( newInfo.headSkinName ) );
+			*slash = 0;
+		}
+	} else if (cg_forceModel.integer) {
 		// forcemodel makes everyone use a single model
 		// to prevent load hitches
 		char modelStr[MAX_QPATH];
@@ -2431,6 +2480,19 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 		}
 	} else {
 		trap_R_AddRefEntityToScene(ent);
+		if (!isMissile && cg_brightPlayers.integer) {
+			if (team == TEAM_RED) {
+				ent->customShader = cgs.media.brightRedPlayers;
+				trap_R_AddRefEntityToScene(ent);
+			} else if (team == TEAM_BLUE) {
+				ent->customShader = cgs.media.brightBluePlayers;
+				trap_R_AddRefEntityToScene(ent);
+			} else {
+				ent->customShader = cgs.media.brightPlayers;
+				trap_R_AddRefEntityToScene(ent);
+			}
+		}
+
 		if (!isMissile && (cgs.dmflags & DF_PLAYER_OVERLAY) && !(state->eFlags & EF_DEAD)) {
 			switch (team) {
 				case TEAM_RED:

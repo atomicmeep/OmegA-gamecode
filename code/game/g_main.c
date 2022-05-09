@@ -196,6 +196,7 @@ vmCvar_t g_developer;
 vmCvar_t g_spSkill;
 vmCvar_t g_bot_noChat;
 //OmegA
+vmCvar_t g_delagMissiles;
 vmCvar_t g_railjump;
 
 mapinfo_result_t mapinfo;
@@ -417,6 +418,7 @@ static cvarTable_t gameCvarTable[] = {
 	{ &g_bot_noChat, "bot_nochat", "0", 0, 0, qtrue},
 
 	//OmegA
+	{ &g_delagMissiles, "g_delagMissiles", "100", CVAR_SYSTEMINFO, 0, qfalse },
 	{ &g_railjump, "g_railjump", "1", 0, 0, qtrue  }
 
 };

@@ -24,8 +24,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #define MODEL_BACK0			"menu/" MENU_ART_DIR "/back_0"
 #define MODEL_BACK1			"menu/" MENU_ART_DIR "/back_1"
-#define MODEL_SELECT		"menu/art/opponents_select"
-#define MODEL_SELECTED		"menu/art/opponents_selected"
+#define MODEL_SELECT		"menu/art_blueish/maps_select"
+#define MODEL_SELECTED		"menu/art_blueish/maps_selected"
 #define MODEL_FRAMEL		"menu/" MENU_ART_DIR "/frame1_l"
 #define MODEL_FRAMER		"menu/" MENU_ART_DIR "/frame1_r"
 #define MODEL_PORTS			"menu/" MENU_ART_DIR "/player_models_ports"
@@ -581,7 +581,7 @@ static void PlayerModel_MenuInit( void )
 			s_playermodel.pics[k].width  		   = 64;
 			s_playermodel.pics[k].height  		   = 64;
 			s_playermodel.pics[k].focuspic         = MODEL_SELECTED;
-			s_playermodel.pics[k].focuscolor       = colorBlue;
+			//s_playermodel.pics[k].focuscolor       = colorRed;
 
 			s_playermodel.picbuttons[k].generic.type	 = MTYPE_BITMAP;
 			s_playermodel.picbuttons[k].generic.flags    = QMF_LEFT_JUSTIFY|QMF_NODEFAULTINIT|QMF_PULSEIFFOCUS;
@@ -596,7 +596,7 @@ static void PlayerModel_MenuInit( void )
 			s_playermodel.picbuttons[k].width  		     = 128;
 			s_playermodel.picbuttons[k].height  		 = 128;
 			s_playermodel.picbuttons[k].focuspic  		 = MODEL_SELECT;
-			s_playermodel.picbuttons[k].focuscolor  	 = colorBlue;
+			//s_playermodel.picbuttons[k].focuscolor  	 = colorRed;
 
 			x += 64+6;
 		}
