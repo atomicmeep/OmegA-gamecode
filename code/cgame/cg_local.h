@@ -913,9 +913,13 @@ typedef struct {
         qhandle_t       neutralOverlay;
         qhandle_t       redOverlay;
         qhandle_t       blueOverlay;
-	qhandle_t       brightPlayers;
 	qhandle_t       brightRedPlayers;
+	qhandle_t       brightYellowPlayers;
+	qhandle_t       brightGreenPlayers;
+	qhandle_t       brightCyanPlayers;
 	qhandle_t       brightBluePlayers;
+	qhandle_t       brightPinkPlayers;
+	qhandle_t       brightWhitePlayers;
 
 	// weapon effect models
 	qhandle_t	bulletFlashModel;

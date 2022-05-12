@@ -2494,10 +2494,22 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 					ent->customShader = cgs.media.brightRedPlayers;
 					trap_R_AddRefEntityToScene(ent);
 				} else if (cg_enemyColor.integer == 2) {
-					ent->customShader = cgs.media.brightPlayers;
+					ent->customShader = cgs.media.brightYellowPlayers;
 					trap_R_AddRefEntityToScene(ent);
 				} else if (cg_enemyColor.integer == 3) {
+					ent->customShader = cgs.media.brightGreenPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_enemyColor.integer == 4) {
+					ent->customShader = cgs.media.brightCyanPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_enemyColor.integer == 5) {
 					ent->customShader = cgs.media.brightBluePlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_enemyColor.integer == 6) {
+					ent->customShader = cgs.media.brightPinkPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_enemyColor.integer == 7) {
+					ent->customShader = cgs.media.brightWhitePlayers;
 					trap_R_AddRefEntityToScene(ent);
 				}
 			} else if (!enemy && cg_teamColor.integer) {
@@ -2505,10 +2517,22 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 					ent->customShader = cgs.media.brightRedPlayers;
 					trap_R_AddRefEntityToScene(ent);
 				} else if (cg_teamColor.integer == 2) {
-					ent->customShader = cgs.media.brightPlayers;
+					ent->customShader = cgs.media.brightYellowPlayers;
 					trap_R_AddRefEntityToScene(ent);
 				} else if (cg_teamColor.integer == 3) {
+					ent->customShader = cgs.media.brightGreenPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_teamColor.integer == 4) {
+					ent->customShader = cgs.media.brightCyanPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_teamColor.integer == 5) {
 					ent->customShader = cgs.media.brightBluePlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_teamColor.integer == 6) {
+					ent->customShader = cgs.media.brightPinkPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_teamColor.integer == 7) {
+					ent->customShader = cgs.media.brightWhitePlayers;
 					trap_R_AddRefEntityToScene(ent);
 				}
 			} else if (team == TEAM_RED) {
@@ -2518,7 +2542,7 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 				ent->customShader = cgs.media.brightBluePlayers;
 				trap_R_AddRefEntityToScene(ent);
 			} else {
-				ent->customShader = cgs.media.brightPlayers;
+				ent->customShader = cgs.media.brightGreenPlayers;
 				trap_R_AddRefEntityToScene(ent);
 			}
 		}

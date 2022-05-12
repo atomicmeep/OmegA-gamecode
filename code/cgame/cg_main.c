@@ -1242,8 +1242,12 @@ static void CG_RegisterGraphics(void) {
 
 	// bright players shader
 	cgs.media.brightRedPlayers = trap_R_RegisterShader( "brightRedPlayers");
+	cgs.media.brightYellowPlayers = trap_R_RegisterShader( "brightYellowPlayers");
+	cgs.media.brightGreenPlayers = trap_R_RegisterShader( "brightGreenPlayers");
+	cgs.media.brightCyanPlayers = trap_R_RegisterShader( "brightCyanPlayers");
 	cgs.media.brightBluePlayers = trap_R_RegisterShader( "brightBluePlayers");
-	cgs.media.brightPlayers = trap_R_RegisterShader( "brightPlayers");
+	cgs.media.brightPinkPlayers = trap_R_RegisterShader( "brightPinkPlayers");
+	cgs.media.brightWhitePlayers = trap_R_RegisterShader( "brightWhitePlayers");
 
 	//For Double Domination:
 	if (cgs.gametype == GT_DOUBLE_D) {
