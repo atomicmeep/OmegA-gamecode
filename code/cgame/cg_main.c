@@ -310,6 +310,8 @@ vmCvar_t cg_developer;
 //OmegA
 vmCvar_t cg_bobgun;
 vmCvar_t cg_brightPlayers;
+vmCvar_t cg_enemyColor;
+vmCvar_t cg_teamColor;
 vmCvar_t cg_enemyModel;
 vmCvar_t cg_teamModel;
 vmCvar_t cg_omegaInitialized;
@@ -537,6 +539,8 @@ static cvarTable_t cvarTable[] = {// bk001129
 	//OmegA
 	{ &cg_bobgun, "cg_bobgun", "0", CVAR_ARCHIVE},
 	{ &cg_brightPlayers, "cg_brightPlayers", "0", CVAR_ARCHIVE},
+	{ &cg_enemyColor, "cg_enemyColor", "", CVAR_ARCHIVE},
+	{ &cg_teamColor, "cg_teamColor", "", CVAR_ARCHIVE},
 	{ &cg_enemyModel, "cg_enemyModel", "", CVAR_ARCHIVE},
 	{ &cg_teamModel, "cg_teamModel", "", CVAR_ARCHIVE},
 	{ &cg_omegaInitialized, "cg_omegaInitialized", "0", CVAR_ARCHIVE},

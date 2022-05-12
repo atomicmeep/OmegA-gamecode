@@ -2019,7 +2019,7 @@ static int CG_DrawPickupItem(int y) {
 			CG_RegisterItemVisuals(value);
 			trap_R_SetColor(fadeColor);
 			CG_DrawPic(8, y, ICON_SIZE / 2, ICON_SIZE / 2, cg_items[ value ].icon);
-			CG_DrawBigString(ICON_SIZE / 2.25 + 16, y + (ICON_SIZE / 6.75 - BIGCHAR_HEIGHT / 6.75), bg_itemlist[ value ].pickup_name, fadeColor[0]);
+			CG_DrawSmallString(ICON_SIZE / 2.25 + 16, y + (ICON_SIZE / 6.75 - BIGCHAR_HEIGHT / 6.75), bg_itemlist[ value ].pickup_name, fadeColor[0]);
 			trap_R_SetColor(NULL);
 		}
 	}

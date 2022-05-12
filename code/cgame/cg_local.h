@@ -1493,6 +1493,8 @@ extern vmCvar_t cg_developer;
 //OmegA
 extern vmCvar_t	cg_bobgun;
 extern vmCvar_t	cg_brightPlayers;
+extern vmCvar_t cg_enemyColor;
+extern vmCvar_t cg_teamColor;
 extern vmCvar_t cg_enemyModel;
 extern vmCvar_t cg_teamModel;
 extern vmCvar_t	cg_screenshake;

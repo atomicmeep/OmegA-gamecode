@@ -1097,8 +1097,6 @@ void CG_NewClientInfo(int clientNum) {
 		return; // player just left
 	}
 
-	local_config = CG_ConfigString(cg.clientNum + CS_PLAYERS);
-	v = Info_ValueForKey(local_config, "t");
 	local_team = atoi(v);
 
 	// build into a temp buffer so the defer checks can use
@@ -2466,6 +2464,16 @@ Also called by CG_Missile for quad rockets, but nobody can tell...
 ===============
  */
 void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int team, qboolean isMissile) {
+	int myteam;
+	int enemy;
+
+	myteam = cg.snap->ps.persistant[PERS_TEAM];
+
+	if (((team == TEAM_FREE) || (team == TEAM_RED) && (myteam == TEAM_BLUE)) || ((team == TEAM_BLUE) && (myteam == TEAM_RED))) {
+		enemy = 1;
+	} else {
+		enemy = 0;
+	}
 
 	if (state->powerups & (1 << PW_INVIS)) {
 		if ((cgs.dmflags & DF_INVIS) == 0) {
@@ -2480,8 +2488,30 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 		}
 	} else {
 		trap_R_AddRefEntityToScene(ent);
-		if (!isMissile && cg_brightPlayers.integer) {
-			if (team == TEAM_RED) {
+		if (!isMissile && cg_brightPlayers.integer && !(state->eFlags & EF_DEAD)) {
+			if (enemy && cg_enemyColor.integer) {
+				if (cg_enemyColor.integer == 1) {
+					ent->customShader = cgs.media.brightRedPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_enemyColor.integer == 2) {
+					ent->customShader = cgs.media.brightPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_enemyColor.integer == 3) {
+					ent->customShader = cgs.media.brightBluePlayers;
+					trap_R_AddRefEntityToScene(ent);
+				}
+			} else if (!enemy && cg_teamColor.integer) {
+				if (cg_teamColor.integer == 1) {
+					ent->customShader = cgs.media.brightRedPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_teamColor.integer == 2) {
+					ent->customShader = cgs.media.brightPlayers;
+					trap_R_AddRefEntityToScene(ent);
+				} else if (cg_teamColor.integer == 3) {
+					ent->customShader = cgs.media.brightBluePlayers;
+					trap_R_AddRefEntityToScene(ent);
+				}
+			} else if (team == TEAM_RED) {
 				ent->customShader = cgs.media.brightRedPlayers;
 				trap_R_AddRefEntityToScene(ent);
 			} else if (team == TEAM_BLUE) {
