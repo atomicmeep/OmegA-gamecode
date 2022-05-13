@@ -934,20 +934,19 @@ gentity_t *fire_prox( gentity_t *self, vec3_t start, vec3_t dir )
 lagNudge
 ==================
 */
-
 int lagNudge(gentity_t *myself) {
-	if (trap_Cvar_VariableValue( "sv_running" ) == 0) return 0;
-	if (g_delagMissiles.integer <= 0 ) {
+	if (trap_Cvar_VariableValue("sv_running") == 0) return 0;
+	if (g_delagMissiles.integer <= 0) {
 		return 0;
 	} else if (g_delagMissiles.integer == 1) {
 		return 50;
 	} else if (g_delagMissiles.integer == 2) {
-		return 1000/sv_fps.integer;
+		return 1000 / sv_fps.integer;
 	} else {
 		int tmp;
 		tmp = myself->client->ps.ping;
 		if (tmp > g_delagMissiles.integer) tmp = g_delagMissiles.integer;
-		tmp += 1000/sv_fps.integer;
+		tmp += 1000 / sv_fps.integer;
 		return tmp;
 	}
 }
