@@ -238,7 +238,7 @@ static void PM_Friction( void )
 
 	vel[0] = vel[0] * newspeed;
 	vel[1] = vel[1] * newspeed;
-	vel[2] = vel[2] * newspeed;
+	vel[2] = vel[2] * newspeed + 1;
 }
 
 

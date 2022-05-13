@@ -1394,7 +1394,7 @@ static void CG_LightningBolt( centity_t *cent, vec3_t origin )
 				}
 			}
 
-	AngleVectors(angle, forward, NULL, NULL );
+		AngleVectors(angle, forward, NULL, NULL );
 //unlagged - true lightning
 //		VectorCopy(cent->lerpOrigin, muzzlePoint );
 //		VectorCopy(cg.refdef.vieworg, muzzlePoint );
