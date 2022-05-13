@@ -491,7 +491,7 @@ CG_DrawStatusBarHead
 
 static void CG_DrawStatusBarHead(float x) {
 	vec3_t angles;
-	float size, stretch;
+	float size;
 	float frac;
 
 	VectorClear(angles);
@@ -718,7 +718,7 @@ static void CG_DrawStatusBar(void) {
 	//
 	value = ps->stats[STAT_HEALTH];
 	if (value > 100) {
-		trap_R_SetColor(colors[4]); // green
+		trap_R_SetColor(weaponColors[7]); // green
 	} else if (value > 25) {
 		trap_R_SetColor(colors[3]); // white
 	} else if (value > 0) {

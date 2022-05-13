@@ -688,11 +688,11 @@ void CG_UpdateCvars(void) {
 		CG_ForceModelChange();
 	}
 	if (enemyModelModificationCount != cg_enemyModel.modificationCount) {
-		enemyModelModificationCount = enemyModelModificationCount;
+		enemyModelModificationCount = cg_enemyModel.modificationCount;
 		CG_ForceModelChange();
 	}
 	if (teamModelModificationCount != cg_teamModel.modificationCount) {
-		teamModelModificationCount = teamModelModificationCount;
+		teamModelModificationCount = cg_teamModel.modificationCount;
 		CG_ForceModelChange();
 	}
 }

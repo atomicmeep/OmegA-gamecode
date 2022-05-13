@@ -1085,7 +1085,6 @@ void CG_NewClientInfo(int clientNum) {
 	const char *configstring;
 	const char *v;
 	char *slash;
-	const char *local_config;
 	int local_team;
 	qboolean enemy = qfalse;
 
@@ -2469,7 +2468,7 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 
 	myteam = cg.snap->ps.persistant[PERS_TEAM];
 
-	if (((team == TEAM_FREE) || (team == TEAM_RED) && (myteam == TEAM_BLUE)) || ((team == TEAM_BLUE) && (myteam == TEAM_RED))) {
+	if (((team == TEAM_FREE) || ((team == TEAM_RED) && (myteam == TEAM_BLUE))) || ((team == TEAM_BLUE) && (myteam == TEAM_RED))) {
 		enemy = 1;
 	} else {
 		enemy = 0;

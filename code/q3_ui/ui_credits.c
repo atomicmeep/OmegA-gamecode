@@ -76,7 +76,7 @@ static void UI_CreditMenu_Draw( void ) {
 	UI_DrawString( 320, y, "Terminating...", UI_CENTER|UI_SMALLFONT, color_red );
         
         y = 480 - PROP_HEIGHT * PROP_SMALL_SIZE_SCALE;
-	UI_DrawProportionalString( 320, y, "www.openarena.ws", UI_CENTER|UI_SMALLFONT, color_white );
+	UI_DrawProportionalString( 320, y, "moddb.com/mods/openarena-omega", UI_CENTER|UI_SMALLFONT, color_white );
 }
 
 
