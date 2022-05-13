@@ -1502,6 +1502,9 @@ extern vmCvar_t cg_teamColor;
 extern vmCvar_t cg_enemyModel;
 extern vmCvar_t cg_teamModel;
 extern vmCvar_t	cg_screenshake;
+extern vmCvar_t	cg_zoomAnim;
+extern vmCvar_t	cg_zoomAnimSpeed;
+extern vmCvar_t	cg_zoomToggle;
 
 //unlagged - cg_unlagged.c
 void CG_PredictWeaponEffects( centity_t *cent );
@@ -1549,6 +1552,8 @@ void CG_TestModelNextFrame_f (void);
 void CG_TestModelPrevFrame_f (void);
 void CG_TestModelNextSkin_f (void);
 void CG_TestModelPrevSkin_f (void);
+void CG_ZoomOut( void );
+void CG_ZoomIn( void );
 void CG_ZoomDown_f( void );
 void CG_ZoomUp_f( void );
 void CG_AddBufferedSound( sfxHandle_t sfx);

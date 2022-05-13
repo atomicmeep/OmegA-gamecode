@@ -316,6 +316,9 @@ vmCvar_t cg_enemyModel;
 vmCvar_t cg_teamModel;
 vmCvar_t cg_omegaInitialized;
 vmCvar_t cg_screenshake;
+vmCvar_t cg_zoomAnim;
+vmCvar_t cg_zoomAnimSpeed;
+vmCvar_t cg_zoomToggle;
 
 typedef struct {
 	vmCvar_t *vmCvar;
@@ -544,7 +547,10 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_enemyModel, "cg_enemyModel", "", CVAR_ARCHIVE},
 	{ &cg_teamModel, "cg_teamModel", "", CVAR_ARCHIVE},
 	{ &cg_omegaInitialized, "cg_omegaInitialized", "0", CVAR_ARCHIVE},
-	{ &cg_screenshake, "cg_screenshake", "0", CVAR_ARCHIVE}
+	{ &cg_screenshake, "cg_screenshake", "0", CVAR_ARCHIVE},
+	{ &cg_zoomAnim, "cg_zoomAnim", "1", CVAR_ARCHIVE},
+	{ &cg_zoomAnimSpeed, "cg_zoomAnimSpeed", "2", CVAR_ARCHIVE},
+	{ &cg_zoomToggle, "cg_zoomToggle", "0", CVAR_ARCHIVE}
 };
 
 static int cvarTableSize = sizeof ( cvarTable) / sizeof ( cvarTable[0]);
