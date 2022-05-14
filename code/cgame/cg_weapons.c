@@ -428,17 +428,7 @@ static void CG_OldRocketTrail( centity_t *ent, const weaponInfo_t *wi )
 	for ( ; t <= ent->trailTime ; t += step ) {
 		BG_EvaluateTrajectory( &es->pos, t, lastPos );
 
-		if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_BLUE) {
-			smoke = CG_SmokePuff( lastPos, up,
-		                      wi->trailRadius,
-		                      1, 1, 1, 0.33f,
-		                      wi->wiTrailTime,
-		                      t,
-		                      0,
-		                      0,
-		                      cgs.media.blueSmokePuffShader );
-		} else if (cg.snap->ps.persistant[PERS_TEAM] == TEAM_RED) {
-			smoke = CG_SmokePuff( lastPos, up,
+		smoke = CG_SmokePuff( lastPos, up,
 		                      wi->trailRadius,
 		                      1, 1, 1, 0.33f,
 		                      wi->wiTrailTime,
@@ -446,16 +436,74 @@ static void CG_OldRocketTrail( centity_t *ent, const weaponInfo_t *wi )
 		                      0,
 		                      0,
 		                      cgs.media.redSmokePuffShader );
-		} else {
-			smoke = CG_SmokePuff( lastPos, up,
+		// use the optimized local entity add
+		smoke->leType = LE_SCALE_FADE;
+	}
+
+}
+
+/*
+==========================
+CG_OldGrenadeTrail
+==========================
+*/
+static void CG_OldGrenadeTrail( centity_t *ent, const weaponInfo_t *wi )
+{
+	int		step;
+	vec3_t	origin, lastPos;
+	int		t;
+	int		startTime, contents;
+	int		lastContents;
+	entityState_t	*es;
+	vec3_t	up;
+	localEntity_t	*smoke;
+
+	if ( cg_noProjectileTrail.integer ) {
+		return;
+	}
+
+	up[0] = 0;
+	up[1] = 0;
+	up[2] = 0;
+
+	step = 3;
+
+	es = &ent->currentState;
+	startTime = ent->trailTime;
+	t = step * ( (startTime + step) / step );
+
+	BG_EvaluateTrajectory( &es->pos, cg.time, origin );
+	contents = CG_PointContents( origin, -1 );
+
+	// if object (e.g. grenade) is stationary, don't toss up smoke
+	if ( es->pos.trType == TR_STATIONARY ) {
+		ent->trailTime = cg.time;
+		return;
+	}
+
+	BG_EvaluateTrajectory( &es->pos, ent->trailTime, lastPos );
+	lastContents = CG_PointContents( lastPos, -1 );
+
+	ent->trailTime = cg.time;
+
+	if ( contents & ( CONTENTS_WATER | CONTENTS_SLIME | CONTENTS_LAVA ) ) {
+		if ( contents & lastContents & CONTENTS_WATER ) {
+			CG_BubbleTrail( lastPos, origin, 8 );
+		}
+		return;
+	}
+
+	for ( ; t <= ent->trailTime ; t += step ) {
+		BG_EvaluateTrajectory( &es->pos, t, lastPos );
+
+		smoke = CG_SmokePuff( lastPos, up,
 		                      wi->trailRadius,
 		                      1, 1, 1, 0.33f,
 		                      wi->wiTrailTime,
 		                      t,
 		                      0,
 		                      0,
-		                      cgs.media.smokePuffShader );
-		}
+		                      cgs.media.greenSmokePuffShader );
 		// use the optimized local entity add
 		smoke->leType = LE_SCALE_FADE;
 	}
@@ -807,7 +855,7 @@ static void CG_PlasmaTrail( centity_t *ent, const weaponInfo_t *wi )
 
 static void CG_GrenadeTrail( centity_t *ent, const weaponInfo_t *wi )
 {
-	CG_OldRocketTrail( ent, wi );
+	CG_OldGrenadeTrail( ent, wi );
 }
 
 

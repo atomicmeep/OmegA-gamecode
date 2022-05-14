@@ -848,8 +848,8 @@ typedef struct {
 
 	qhandle_t	smokePuffShader;
 	qhandle_t	smokePuffRageProShader;
-	qhandle_t	blueSmokePuffShader;
 	qhandle_t	redSmokePuffShader;
+	qhandle_t	greenSmokePuffShader;
 	qhandle_t	shotgunSmokePuffShader;
 	qhandle_t	plasmaBallShader;
 	qhandle_t	waterBubbleShader;

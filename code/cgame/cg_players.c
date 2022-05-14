@@ -1085,6 +1085,7 @@ void CG_NewClientInfo(int clientNum) {
 	const char *configstring;
 	const char *v;
 	char *slash;
+	const char *local_config;
 	int local_team;
 	qboolean enemy = qfalse;
 
@@ -1096,6 +1097,8 @@ void CG_NewClientInfo(int clientNum) {
 		return; // player just left
 	}
 
+	local_config = CG_ConfigString(cg.clientNum + CS_PLAYERS);
+	v = Info_ValueForKey(local_config, "t");
 	local_team = atoi(v);
 
 	// build into a temp buffer so the defer checks can use
@@ -2488,49 +2491,49 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 	} else {
 		trap_R_AddRefEntityToScene(ent);
 		if (!isMissile && cg_brightPlayers.integer && !(state->eFlags & EF_DEAD)) {
-			if (enemy && cg_enemyColor.integer) {
-				if (cg_enemyColor.integer == 1) {
+			if (enemy && cg_enemyColor.string) {
+				if (Q_stricmp(cg_enemyColor.string, "red") == 0) {
 					ent->customShader = cgs.media.brightRedPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_enemyColor.integer == 2) {
+				} else if (Q_stricmp(cg_enemyColor.string, "yellow") == 0) {
 					ent->customShader = cgs.media.brightYellowPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_enemyColor.integer == 3) {
+				} else if (Q_stricmp(cg_enemyColor.string, "green") == 0) {
 					ent->customShader = cgs.media.brightGreenPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_enemyColor.integer == 4) {
+				} else if (Q_stricmp(cg_enemyColor.string, "cyan") == 0) {
 					ent->customShader = cgs.media.brightCyanPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_enemyColor.integer == 5) {
+				} else if (Q_stricmp(cg_enemyColor.string, "blue") == 0) {
 					ent->customShader = cgs.media.brightBluePlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_enemyColor.integer == 6) {
+				} else if (Q_stricmp(cg_enemyColor.string, "pink") == 0) {
 					ent->customShader = cgs.media.brightPinkPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_enemyColor.integer == 7) {
+				} else if (Q_stricmp(cg_enemyColor.string, "white") == 0) {
 					ent->customShader = cgs.media.brightWhitePlayers;
 					trap_R_AddRefEntityToScene(ent);
 				}
-			} else if (!enemy && cg_teamColor.integer) {
-				if (cg_teamColor.integer == 1) {
+			} else if (!enemy && cg_teamColor.string) {
+				if (Q_stricmp(cg_teamColor.string, "red") == 0) {
 					ent->customShader = cgs.media.brightRedPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_teamColor.integer == 2) {
+				} else if (Q_stricmp(cg_teamColor.string, "yellow") == 0) {
 					ent->customShader = cgs.media.brightYellowPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_teamColor.integer == 3) {
+				} else if (Q_stricmp(cg_teamColor.string, "green") == 0) {
 					ent->customShader = cgs.media.brightGreenPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_teamColor.integer == 4) {
+				} else if (Q_stricmp(cg_teamColor.string, "cyan") == 0) {
 					ent->customShader = cgs.media.brightCyanPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_teamColor.integer == 5) {
+				} else if (Q_stricmp(cg_teamColor.string, "blue") == 0) {
 					ent->customShader = cgs.media.brightBluePlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_teamColor.integer == 6) {
+				} else if (Q_stricmp(cg_teamColor.string, "pink") == 0) {
 					ent->customShader = cgs.media.brightPinkPlayers;
 					trap_R_AddRefEntityToScene(ent);
-				} else if (cg_teamColor.integer == 7) {
+				} else if (Q_stricmp(cg_teamColor.string, "white") == 0) {
 					ent->customShader = cgs.media.brightWhitePlayers;
 					trap_R_AddRefEntityToScene(ent);
 				}
