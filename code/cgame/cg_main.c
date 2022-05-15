@@ -439,7 +439,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_timescaleFadeEnd, "cg_timescaleFadeEnd", "1", 0},
 	{ &cg_timescaleFadeSpeed, "cg_timescaleFadeSpeed", "0", 0},
 	{ &cg_timescale, "timescale", "1", 0},
-	{ &cg_scorePlum, "cg_scorePlums", "1", CVAR_USERINFO | CVAR_ARCHIVE},
+	{ &cg_scorePlum, "cg_scorePlums", "0", CVAR_USERINFO | CVAR_ARCHIVE},
 	{ &cg_obituaryOutput, "cg_obituaryOutput", "3", CVAR_ARCHIVE},
 	//unlagged - smooth clients #2
 	// this is done server-side now
@@ -971,7 +971,7 @@ static void CG_RegisterSounds(void) {
 
 		case 0:
 		default:
-			cgs.media.hitSound = trap_S_RegisterSound("sound/feedback/hit.wav", qfalse);
+			cgs.media.hitSound = trap_S_RegisterSound("sound/feedback/hit1.wav", qfalse);
 	};
 
 #ifdef MISSIONPACK
