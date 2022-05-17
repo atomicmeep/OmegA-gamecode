@@ -254,6 +254,7 @@ typedef enum {
 	LE_FADE_RGB,
 	LE_SCALE_FADE,
 	LE_SCOREPLUM,
+	LE_DAMAGEPLUM,
 	LE_KAMIKAZE,
 	LE_INVULIMPACT,
 	LE_INVULJUICED,
@@ -1497,6 +1498,7 @@ extern vmCvar_t cg_developer;
 //OmegA
 extern vmCvar_t	cg_bobgun;
 extern vmCvar_t	cg_brightPlayers;
+extern vmCvar_t	cg_damagePlums;
 extern vmCvar_t cg_enemyColor;
 extern vmCvar_t cg_teamColor;
 extern vmCvar_t cg_enemyModel;
@@ -1763,6 +1765,7 @@ void CG_InvulnerabilityImpact( vec3_t org, vec3_t angles );
 void CG_InvulnerabilityJuiced( vec3_t org );
 void CG_LightningBoltBeam( vec3_t start, vec3_t end );
 void CG_ScorePlum( int client, vec3_t org, int score );
+void CG_DamagePlum( int client, vec3_t org, int score );
 
 void CG_GibPlayer( vec3_t playerOrigin );
 void CG_BigExplode( vec3_t playerOrigin );

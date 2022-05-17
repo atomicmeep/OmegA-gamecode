@@ -45,6 +45,23 @@ void ScorePlum( gentity_t *ent, vec3_t origin, int score )
 
 /*
 ============
+DamagePlum
+============
+*/
+void DamagePlum( gentity_t *ent, vec3_t origin, int score ) {
+	gentity_t *plum;
+
+	plum = G_TempEntity( origin, EV_DAMAGEPLUM );
+	// only send this temp entity to a single client
+	plum->r.svFlags |= SVF_SINGLECLIENT;
+	plum->r.singleClient = ent->s.number;
+	//
+	plum->s.otherEntityNum = ent->s.number;
+	plum->s.time = score;
+}
+
+/*
+============
 AddScore
 
 Adds score to both the client and his team
@@ -1357,6 +1374,14 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 		if(attacker->health>g_vampireMaxHealth.integer) {
 			attacker->health = g_vampireMaxHealth.integer;
 		}
+	}
+
+ 	if ( damage && targ->client && targ != attacker ) {
+		if ( mod != MOD_SHOTGUN ) {
+			DamagePlum( attacker, targ->r.currentOrigin, damage );
+		}
+		else
+			targ->sumShotgunDamage += damage;
 	}
 
 	// do the damage

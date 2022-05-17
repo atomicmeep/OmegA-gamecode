@@ -1091,7 +1091,7 @@ void CG_RegisterWeapon( int weaponNum )
 //#ifdef MISSIONPACK
 	case WP_PROX_LAUNCHER:
 		weaponInfo->missileModel = trap_R_RegisterModel( "models/weaphits/proxmine.md3" );
-		weaponInfo->missileTrailFunc = CG_GrenadeTrail;
+		//weaponInfo->missileTrailFunc = CG_GrenadeTrail;
 		weaponInfo->wiTrailTime = 700;
 		weaponInfo->trailRadius = 32;
 		MAKERGB( weaponInfo->flashDlightColor, 1, 0.70f, 0 );

@@ -158,6 +158,7 @@ struct gentity_s {
 	qboolean	takedamage;
 
 	int			damage;
+	int			sumShotgunDamage;
 	int			splashDamage;	// quad will increase this without increasing radius
 	int			splashRadius;
 	int			methodOfDeath;
@@ -706,6 +707,7 @@ void TossClientItems( gentity_t *self );
 void TossClientPersistantPowerups( gentity_t *self );
 void TossClientCubesValues(vec3_t angles, vec3_t origin, vec3_t velocity);
 void TossClientCubes( gentity_t *self );
+void DamagePlum( gentity_t *ent, vec3_t origin, int score ); 
 
 // damage flags
 #define DAMAGE_RADIUS				0x00000001	// damage was indirect
