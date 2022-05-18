@@ -197,7 +197,8 @@ vmCvar_t g_spSkill;
 vmCvar_t g_bot_noChat;
 //OmegA
 vmCvar_t g_delagMissiles;
-vmCvar_t g_railjump;
+vmCvar_t g_noInvisWalls;
+vmCvar_t g_railJump;
 
 mapinfo_result_t mapinfo;
 
@@ -419,7 +420,8 @@ static cvarTable_t gameCvarTable[] = {
 
 	//OmegA
 	{ &g_delagMissiles, "g_delagMissiles", "100", CVAR_SYSTEMINFO, 0, qfalse },
-	{ &g_railjump, "g_railjump", "1", 0, 0, qtrue  }
+	{ &g_noInvisWalls, "g_noInvisWalls", "0", 0, 0, qtrue },
+	{ &g_railJump, "g_railJump", "1", 0, 0, qtrue  }
 
 };
 

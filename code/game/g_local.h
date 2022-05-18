@@ -1182,7 +1182,8 @@ extern vmCvar_t g_spSkill;
 extern vmCvar_t g_bot_noChat;
 //OmegA
 extern vmCvar_t g_delagMissiles;
-extern vmCvar_t g_railjump;
+extern vmCvar_t g_noInvisWalls;
+extern vmCvar_t g_railJump;
 
 void	trap_Printf( const char *fmt );
 void	trap_Error( const char *fmt ) __attribute__((noreturn));

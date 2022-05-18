@@ -1186,8 +1186,6 @@ static void CG_RegisterGraphics(void) {
 
 	cgs.media.smokePuffShader = trap_R_RegisterShader("smokePuff");
 	cgs.media.smokePuffRageProShader = trap_R_RegisterShader("smokePuffRagePro");
-	cgs.media.redSmokePuffShader = trap_R_RegisterShader("redSmokePuff");
-	cgs.media.greenSmokePuffShader = trap_R_RegisterShader("greenSmokePuff");
 	cgs.media.shotgunSmokePuffShader = trap_R_RegisterShader("shotgunSmokePuff");
 	cgs.media.nailPuffShader = trap_R_RegisterShader("nailtrail");
 	cgs.media.blueProxMine = trap_R_RegisterModel("models/weaphits/proxmineb.md3");

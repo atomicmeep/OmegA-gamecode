@@ -345,6 +345,10 @@ void SpectatorThink( gentity_t *ent, usercmd_t *ucmd ) {
 		pm.ps = &client->ps;
 		pm.cmd = *ucmd;
 		pm.tracemask = MASK_PLAYERSOLID & ~CONTENTS_BODY;	// spectators can fly through bodies
+		if (g_noInvisWalls.integer) {
+			pm.tracemask &= ~CONTENTS_PLAYERCLIP;
+			PMF_NOINVISWALLS;
+		}
 		pm.trace = trap_Trace;
 		pm.pointcontents = trap_PointContents;
 
@@ -1047,6 +1051,9 @@ void ClientThink_real( gentity_t *ent ) {
 	}
 	else {
 		pm.tracemask = MASK_PLAYERSOLID;
+	}
+	if (g_noInvisWalls.integer) {
+		pm.tracemask &= ~CONTENTS_PLAYERCLIP;
 	}
 	pm.trace = trap_Trace;
 	pm.pointcontents = trap_PointContents;

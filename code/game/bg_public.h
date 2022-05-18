@@ -190,6 +190,7 @@ typedef enum {
 #define PMF_INVULEXPAND		16384	// invulnerability sphere set to full size
 //Elimination players cannot fire in warmup
 #define PMF_ELIMWARMUP		32768	//Bit 15
+#define PMF_NOINVISWALLS	65536
 
 #define	PMF_ALL_TIMES	(PMF_TIME_WATERJUMP|PMF_TIME_LAND|PMF_TIME_KNOCKBACK)
 
