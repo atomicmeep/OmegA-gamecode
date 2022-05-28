@@ -197,7 +197,6 @@ vmCvar_t g_spSkill;
 vmCvar_t g_bot_noChat;
 //OmegA
 vmCvar_t g_delagMissiles;
-vmCvar_t g_noInvisWalls;
 vmCvar_t g_railJump;
 
 mapinfo_result_t mapinfo;
@@ -305,7 +304,7 @@ static cvarTable_t gameCvarTable[] = {
 	{ &g_smoothClients, "g_smoothClients", "1", 0, 0, qfalse},
 	{ &pmove_fixed, "pmove_fixed", "0", CVAR_SYSTEMINFO | CVAR_ARCHIVE, 0, qtrue},
 	{ &pmove_msec, "pmove_msec", "11", CVAR_SYSTEMINFO | CVAR_ARCHIVE, 0, qtrue},
-	{ &pmove_float, "pmove_float", "1", CVAR_SYSTEMINFO | CVAR_ARCHIVE, 0, qtrue},
+	{ &pmove_float, "pmove_float", "0", CVAR_SYSTEMINFO | CVAR_ARCHIVE, 0, qtrue},
 
 //unlagged - server options
 	{ &g_delagHitscan, "g_delagHitscan", "0", CVAR_ARCHIVE | CVAR_SERVERINFO, 0, qtrue },
@@ -420,7 +419,6 @@ static cvarTable_t gameCvarTable[] = {
 
 	//OmegA
 	{ &g_delagMissiles, "g_delagMissiles", "100", CVAR_SYSTEMINFO, 0, qfalse },
-	{ &g_noInvisWalls, "g_noInvisWalls", "0", 0, 0, qtrue },
 	{ &g_railJump, "g_railJump", "1", 0, 0, qtrue  }
 
 };
