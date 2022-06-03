@@ -2339,6 +2339,11 @@ static qboolean CG_PlayerShadow(centity_t *cent, float *shadowPlane) {
 		return qfalse;
 	}
 
+	//no shadows when dead
+	if (EF_DEAD) {
+		return qfalse;
+	}
+
 	// send a trace down from the player to the ground
 	VectorCopy(cent->lerpOrigin, end);
 	end[2] -= SHADOW_DISTANCE;
@@ -2556,6 +2561,9 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 					trap_R_AddRefEntityToScene(ent);
 				}
 			}
+		} else if (!isMissile && cg_brightPlayers.integer && (state->eFlags & EF_DEAD)) {
+				ent->customShader = cgs.media.brightGreyPlayers;
+				trap_R_AddRefEntityToScene(ent);
 		}
 
 		if (!isMissile && (cgs.dmflags & DF_PLAYER_OVERLAY) && !(state->eFlags & EF_DEAD)) {

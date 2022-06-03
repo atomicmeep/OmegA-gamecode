@@ -311,6 +311,7 @@ vmCvar_t cg_developer;
 vmCvar_t cg_bobgun;
 vmCvar_t cg_brightPlayers;
 vmCvar_t cg_damagePlums;
+vmCvar_t cg_thinLightningBolt;
 vmCvar_t cg_enemyColor;
 vmCvar_t cg_teamColor;
 vmCvar_t cg_enemyModel;
@@ -545,6 +546,7 @@ static cvarTable_t cvarTable[] = {// bk001129
 	{ &cg_bobgun, "cg_bobgun", "0", CVAR_ARCHIVE},
 	{ &cg_brightPlayers, "cg_brightPlayers", "0", CVAR_ARCHIVE},
 	{ &cg_damagePlums, "cg_damagePlums", "1", CVAR_USERINFO | CVAR_ARCHIVE },
+	{ &cg_thinLightningBolt, "cg_thinLightningBolt", "0", CVAR_ARCHIVE | CVAR_LATCH },
 	{ &cg_enemyColor, "cg_enemyColor", "", CVAR_ARCHIVE},
 	{ &cg_teamColor, "cg_teamColor", "", CVAR_ARCHIVE},
 	{ &cg_enemyModel, "cg_enemyModel", "", CVAR_ARCHIVE},
@@ -1256,6 +1258,7 @@ static void CG_RegisterGraphics(void) {
 	cgs.media.brightBluePlayers = trap_R_RegisterShader( "brightBluePlayers");
 	cgs.media.brightPinkPlayers = trap_R_RegisterShader( "brightPinkPlayers");
 	cgs.media.brightWhitePlayers = trap_R_RegisterShader( "brightWhitePlayers");
+	cgs.media.brightGreyPlayers = trap_R_RegisterShader( "brightGreyPlayers");
 
 	//For Double Domination:
 	if (cgs.gametype == GT_DOUBLE_D) {
