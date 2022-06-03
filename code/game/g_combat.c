@@ -181,11 +181,6 @@ void TossClientItems( gentity_t *self )
 			}
 		}
 	}
-
-	if (self->client->ps.powerups[PW_PREDATOR] > level.time) {
-		// don't drop the predator powerup
-		self->client->ps.powerups[PW_PREDATOR] = level.time;
-	} 
 }
 
 /*

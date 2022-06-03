@@ -621,23 +621,6 @@ gitem_t bg_itemlist[] ={
 		/* sounds */ "sound/items/flight.wav"
 	},
 
-	/*QUAKED item_predator (.3 .3 1) (-16 -16 -16) (16 16 16) suspended
-	 */
-	{
-		"item_predator",
-		"sound/items/predator.wav",
-		{ NULL,
-			NULL,
-			NULL, NULL},
-		/* icon */ "icons/predator",
-		/* pickup */ "Predator",
-		30,
-		IT_POWERUP,
-		PW_PREDATOR,
-		/* precache */ "",
-		/* sounds */ "sound/items/predator.wav"
-	},
-
 	/*QUAKED team_CTF_redflag (1 0 0) (-16 -16 -16) (16 16 16)
 	Only in CTF games
 	 */
@@ -1952,4 +1935,12 @@ void MapInfoGet(const char* mapname, int gametype, mapinfo_result_t *result) {
 	}
 
 	trap_FS_FCloseFile(file);
+}
+
+//ratmod delagMissile
+qboolean BG_IsElimTeamGT(gametype_t gametype) {
+	return gametype == GT_ELIMINATION || gametype == GT_CTF_ELIMINATION;
+}
+qboolean BG_IsElimGT(gametype_t gametype) {
+	return BG_IsElimTeamGT(gametype) || gametype == GT_LMS;
 }

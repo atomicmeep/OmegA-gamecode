@@ -2334,13 +2334,8 @@ static qboolean CG_PlayerShadow(centity_t *cent, float *shadowPlane) {
 		return qfalse;
 	}
 
-	//no shadows when predator
-	if (cent->currentState.powerups & (1 << PW_PREDATOR)) {
-		return qfalse;
-	}
-
 	//no shadows when dead
-	if (EF_DEAD) {
+	if (cent->currentState.eFlags & EF_DEAD) {
 		return qfalse;
 	}
 
@@ -2483,12 +2478,6 @@ void CG_AddRefEntityWithPowerups(refEntity_t *ent, entityState_t *state, int tea
 	}
 
 	if (state->powerups & (1 << PW_INVIS)) {
-		if ((cgs.dmflags & DF_INVIS) == 0) {
-			ent->customShader = cgs.media.invisShader;
-			trap_R_AddRefEntityToScene(ent);
-		}
-	}
-	if (state->powerups & (1 << PW_PREDATOR)) {
 		if ((cgs.dmflags & DF_INVIS) == 0) {
 			ent->customShader = cgs.media.invisShader;
 			trap_R_AddRefEntityToScene(ent);

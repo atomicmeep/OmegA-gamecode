@@ -269,9 +269,6 @@ qboolean EntityIsInvisible(aas_entityinfo_t *entinfo) {
 	if (entinfo->powerups & (1 << PW_INVIS)) {
 		return qtrue;
 	}
-	if (entinfo->powerups & (1 << PW_PREDATOR)) {
-		return qtrue;
-	}
 	return qfalse;
 }
 

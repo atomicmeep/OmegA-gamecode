@@ -312,7 +312,6 @@ typedef enum {
 	PW_INVIS,
 	PW_REGEN,
 	PW_FLIGHT,
-	PW_PREDATOR,
 
 	PW_REDFLAG,
 	PW_BLUEFLAG,
@@ -857,6 +856,10 @@ qboolean	BG_PlayerTouchesItem( playerState_t *ps, entityState_t *item, int atTim
 //KK-OAX
 //bg_misc.c
 const char *BG_TeamName( team_t team );
+
+//ratmod delagMissile
+qboolean BG_IsElimTeamGT(gametype_t gametype);
+qboolean BG_IsElimGT(gametype_t gametype);
 
 typedef struct mapinfo_result_s {
 	int minPlayers;

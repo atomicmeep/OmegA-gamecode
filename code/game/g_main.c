@@ -196,8 +196,19 @@ vmCvar_t g_developer;
 vmCvar_t g_spSkill;
 vmCvar_t g_bot_noChat;
 //OmegA
-vmCvar_t g_delagMissiles;
 vmCvar_t g_railJump;
+//ratmod delagMissile
+vmCvar_t g_delagMissileMaxLatency; 
+vmCvar_t g_delagMissileDebug; 
+vmCvar_t g_delagMissiles; 
+vmCvar_t g_delagMissileLimitVariance;
+vmCvar_t g_delagMissileLimitVarianceMs;
+vmCvar_t g_delagMissileBaseNudge; 
+vmCvar_t g_delagMissileLatencyMode; 
+vmCvar_t g_delagMissileCorrectFrameOffset; 
+vmCvar_t g_delagMissileNudgeOnly; 
+vmCvar_t g_delagMissileImmediateRun;
+vmCvar_t g_predictMissiles;
 
 mapinfo_result_t mapinfo;
 
@@ -418,8 +429,20 @@ static cvarTable_t gameCvarTable[] = {
 	{ &g_bot_noChat, "bot_nochat", "0", 0, 0, qtrue},
 
 	//OmegA
-	{ &g_delagMissiles, "g_delagMissiles", "100", CVAR_SYSTEMINFO, 0, qfalse },
-	{ &g_railJump, "g_railJump", "1", 0, 0, qtrue  }
+	{ &g_railJump, "g_railJump", "1", 0, 0, qtrue},
+
+	//ratmod delagMissile
+        { &g_delagMissileMaxLatency, "g_delagMissileMaxLatency", "500", CVAR_ARCHIVE | CVAR_SERVERINFO, 0, qfalse },
+        { &g_delagMissileDebug, "g_delagMissileDebug", "0", 0, 0, qfalse},
+        { &g_delagMissiles, "g_delagMissiles", "1", CVAR_ARCHIVE, 0, qfalse},
+        { &g_delagMissileLimitVariance, "g_delagMissileLimitVariance", "1", CVAR_ARCHIVE, 0, qfalse},
+        { &g_delagMissileLimitVarianceMs, "g_delagMissileLimitVarianceMs", "25", CVAR_ARCHIVE, 0, qfalse},
+        { &g_delagMissileLatencyMode, "g_delagMissileLatencyMode", "1", CVAR_ARCHIVE, 0, qfalse},
+        { &g_delagMissileCorrectFrameOffset, "g_delagMissileCorrectFrameOffset", "1", CVAR_ARCHIVE, 0, qfalse},
+        { &g_delagMissileNudgeOnly, "g_delagMissileNudgeOnly", "0", CVAR_ARCHIVE, 0, qfalse},
+        { &g_delagMissileImmediateRun, "g_delagMissileImmediateRun", "2", CVAR_ARCHIVE, 0, qfalse},
+        { &g_predictMissiles, "g_predictMissiles", "1", CVAR_ARCHIVE, 0, qfalse},
+        { &g_delagMissileBaseNudge, "g_delagMissileBaseNudge", "10", CVAR_ARCHIVE | CVAR_SERVERINFO, 0, qfalse}
 
 };
 
@@ -609,6 +632,14 @@ void G_RegisterCvars( void )
 	}
 
 	level.warmupModificationCount = g_warmup.modificationCount;
+}
+
+//ratmod delagMissile
+qboolean G_IsElimTeamGT(void) {
+	return BG_IsElimTeamGT(g_gametype.integer);
+}
+qboolean G_IsElimGT(void) {
+	return BG_IsElimGT(g_gametype.integer);
 }
 
 /*

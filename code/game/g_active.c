@@ -457,17 +457,9 @@ static void ClientTimerActions( gentity_t *ent, int msec ) {
 				G_AddEvent( ent, EV_POWERUP_REGEN, 0 );
 			}
 		} else {
-			// count down health when over max and predator is not active
-			if (!(ent->client->ps.powerups[PW_PREDATOR] > level.time)) {
-				if ( ent->health > client->ps.stats[STAT_MAX_HEALTH] ) { 
-					ent->health--;
-				}
-			} else {
-				// count down health when predator is active
-				ent->health-=5;
-				if ( ent->health < 11) {
-					ent->client->ps.powerups[PW_PREDATOR] = level.time;
-				}
+			// count down health when over max
+			if ( ent->health > client->ps.stats[STAT_MAX_HEALTH] ) {
+				ent->health--;
 			}
 			if ( G_IsARoundBasedGametype(g_gametype.integer) && level.humansEliminated ) {
 				ent->damage=5;
