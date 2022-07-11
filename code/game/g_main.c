@@ -226,6 +226,8 @@ vmCvar_t        g_delagMissileMaxLatency;
 vmCvar_t        g_delagMissileNudgeOnly;
 vmCvar_t        g_predictMissiles;
 
+vmCvar_t        g_itemPickup; //from ratmod
+
 // bk001129 - made static to avoid aliasing
 static cvarTable_t		gameCvarTable[] = {
 	// don't override the cheat state set by the system
@@ -442,6 +444,7 @@ static cvarTable_t		gameCvarTable[] = {
 	{ &g_railThroughWalls, "g_railThroughWalls", "0", CVAR_ARCHIVE, 0, qtrue },
 	{ &g_teleportMissiles, "g_teleportMissiles", "1", CVAR_ARCHIVE, 0, qtrue },
 	{ &g_jumppadGrenades, "g_jumppadGrenades", "1", CVAR_ARCHIVE, 0, qtrue },
+	{ &g_itemPickup, "g_itemPickup", "1", CVAR_ARCHIVE , 0, qtrue },
 
 	//ratmod delagMissile
         { &g_delagMissiles, "g_delagMissiles", "1", CVAR_ARCHIVE, 0, qfalse },

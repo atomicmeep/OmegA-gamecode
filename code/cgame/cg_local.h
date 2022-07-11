@@ -1203,10 +1203,12 @@ typedef struct {
 
 //unlagged - client options
 	// this will be set to the server's g_delagHitscan
-	int				delagHitscan;
+	int			delagHitscan;
 //unlagged - client options
 //KK-OAX For storing whether or not the server has multikills enabled. 
-    int             altExcellent;
+    	int             	altExcellent;
+    
+    	int             	itemPickup; //from ratmod
 } cgs_t;
 
 //==============================================================================

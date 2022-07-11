@@ -1183,6 +1183,7 @@ extern vmCvar_t g_railJump;
 extern vmCvar_t g_railThroughWalls;
 extern vmCvar_t g_teleportMissiles; //from ratmod
 extern vmCvar_t g_jumppadGrenades; //from ratmod
+extern vmCvar_t g_itemPickup; //from ratmod
 
 //ratmod delagMissile
 extern vmCvar_t g_delagMissiles;
